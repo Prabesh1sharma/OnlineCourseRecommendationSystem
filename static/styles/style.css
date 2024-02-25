@@ -1,0 +1,919 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    font-family: 'Calibri';
+}
+body {
+    background-color: rgb(55, 55, 55);
+    color: white;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* navbar ra footer le  main ko content nachekos bhanera */
+    padding: 60px 20px 110px 20px;
+}
+
+/* nav */
+
+nav {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+    display: flex;
+    background-color: rgb(100, 255, 255);
+    border: 2px solid black;
+    height: 60px;
+}
+
+nav ul{
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav .navcontents li {
+    margin: 0px 5px;
+    border-radius: 5px;
+}
+
+nav .navcontents li a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 30px;
+    color: rgb(75, 75, 75);
+    border-radius: 5px;
+}
+
+nav .navcontents a:hover {
+    color: black;
+    background-color: rgb(0, 180, 180);
+    font-size: 125%;
+}
+
+.active a {
+    color: black !important;
+    background-color: rgb(0, 180, 180);
+    font-size: 135% !important;
+    border: 1px solid black;
+}
+
+/* navbar ma login */
+nav .login{
+    position: absolute;
+    top: 11px;
+    right: 13px;
+    height: 37px;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: rgb(0, 180, 180);
+    font-size: 20px;
+}
+/* nav .login li{
+    
+} */
+nav .login a{
+    text-decoration: none;
+    display: flex;
+    align-items: flex-start;
+    padding: 7px 12px;
+    border-radius: 30px;
+    color: black;
+}
+nav .login a:hover{
+    color: rgb(0, 180, 180);
+    background-color: black;
+}
+/* hamburger menu */
+
+a#hamburger_menu {
+    padding: 4px 4px;
+    margin: 3px 3px;
+    text-decoration: none;
+}
+
+#hamburger_menu {
+    position: absolute;
+    left: 10px;
+    font-size: 44px;
+    color: black;
+    display: none;
+}
+
+@media (max-width: 870px) {
+    #hamburger_menu {
+        display: flex;
+    }
+    
+    #hamburger_menu:hover + .navcontents li{
+        display: block;
+    }
+
+    nav .navcontents{
+        display: block;
+        padding-top: 61px;
+        width: 100%;
+    }
+
+    nav .navcontents li{
+        background: rgb(150, 255, 255);
+        border: 1px solid black;
+        margin: 0px;
+        display: none;
+    }
+
+    nav .navcontents li a{
+        display: block;
+        text-align: center;
+        color: rgb(75, 75, 75);
+    }
+
+    nav .navcontents .active{
+        font-size: 110% !important;
+    }
+
+    nav .navcontents:hover li {
+        display: block;
+    }
+}
+
+/* navbar ma profile ko dropdown  */
+
+.userprofile {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+a#profilepic {
+    padding: 0px 25px 0px 10px;
+}
+
+#profilepic img {
+    height: 33px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.userprofile:hover>#dropdown {
+    display: block;
+}
+
+#dropdown {
+    display: none;
+    background-color: rgb(100, 255, 255);
+    border: 3px solid black;
+    border-radius: 5px;
+    width: 170px;
+    position: absolute;
+    top: 49px;
+    right: 10px;
+}
+
+#dropdown li {
+    display: block;
+}
+
+#dropdown hr {
+    border: none;
+    border-top: 1px double #000;
+}
+
+#dropdown a {
+    font-size: medium;
+}
+
+
+
+/* searchbox */
+
+/* navbar bhitra ko searchbox  */
+.searchbox{
+    background-color: white;
+}
+
+nav .searchbox{
+    border: 2px solid black;
+    border-radius: 20px;
+    position: absolute;
+    top: 14px;
+    right: 95px;
+}
+
+.searchbox input {
+    width: 200px;
+    height: 30px;
+    padding-left: 8px;
+    border: none;
+    outline: none;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.searchbox input::-webkit-search-cancel-button {
+    display: none;
+}
+
+.searchbox a {
+    padding: 0px 7px 0px 3px;
+}
+
+.searchbox .icon {
+    font-size: 16px;
+    color: black;
+}
+
+.searchbox a:hover .icon {
+    font-weight: bold;
+}
+
+/* searchpage ko searchbox  */
+main .searchbox {
+    margin: 30vh 0;
+    display: block;
+    border: 3px solid black;
+    border-radius: 30px;
+}
+
+main .searchbox input {
+    width: 500px;
+    height: 35px;
+    padding-left: 15px;
+    font-size: 150%;
+    text-align: center;
+}
+
+main .searchbox a {
+    padding: 0px 15px 0px 0px;
+}
+
+main .searchbox .icon {
+    font-size: 28px;
+}
+
+/* responsive searchbox in searchpage */
+@media (max-width: 850px) {
+    main .searchbox input{
+        width: 400px;
+        height: 30px;
+        font-size: medium;
+    }
+    main .searchbox .icon {
+        font-size: 18px;
+    }
+}
+@media (max-width: 600px) {
+    main .searchbox input{
+        width: 200px;
+        height: 30px;
+        font-size: small;
+    }
+    main .searchbox .icon {
+        font-size: 14px;
+    }    
+}
+@media (max-width: 400px) {
+    main .searchbox input{
+        width: 150px;
+        height: 30px;
+        font-size: small;
+    }
+    main .searchbox .icon {
+        font-size: 14px;
+    }
+}
+
+/* searchbox aftersearch */
+.aftersearch{
+    margin: 30px 0px 0px 0px !important;
+}
+
+
+/* page layout */
+
+.layout{
+    width: 100%;
+    padding-top: 20px;
+}
+.layout h1 {
+    text-align: center;
+    font-weight: bold;
+}
+.layout h1 i{
+    padding: 0p 8px;
+}
+.layout .selecttoremove a.ellipsis{
+    margin-bottom: 10px;
+    display: block;
+    text-decoration: none;
+    text-align: right;
+}
+.layout .selecttoremove .ellipsis i{
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.235);
+    padding: 2px 10px 0px 10px;
+    color: black;
+    font-size: 25px;
+    font-weight: 100%;
+}
+
+/* course format*/
+
+.layout .courses{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.layout .courses .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    /*hovereffectlai ra free/paid yo mathi overlap garauna*/
+    height: 200px;
+    width: 325px;
+    border: 2px solid rgb(75, 75, 75);
+    border-radius: 8px;
+    margin: 12px;
+    padding: 8px;
+    background-image: url(/image/1.jpg);
+    background-size: cover;
+}
+.layout .courses .container h2{
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+}
+.layout .courses .container img{
+    opacity: 0.5;
+}
+.layout .courses .container .details{
+    position: absolute;
+    bottom: 3px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.5);
+    padding-top: 5px;
+    width: 96%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3px; 
+    font-size: 16px;
+}
+.layout .courses .container .details .column2{
+    text-align: right;
+    padding-right: 5px;
+}
+.layout .courses .container .details .column1{
+    padding-left: 5px;
+}
+.layout .courses .container .hovereffect{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    border-radius: 8px;
+    justify-content: space-around;
+    align-items: flex-end;
+    display: none;
+    background-color: rgba(253, 240, 213, 0.5);
+}
+.layout .courses .container .hovereffect .freeimgcontainer{
+    position: absolute;
+    top: 4px;
+    left: 0px;
+}
+.layout .courses .container .hovereffect .freeimgcontainer img{
+    height: 50px;
+    width: 80px;
+}
+.layout .courses .container .hovereffect .freeimgcontainer .text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -65%);
+    font-size: large;
+    font-weight: bolder;
+    color: black;
+}
+.layout .courses .container .hovereffect .unsave{
+    text-decoration: none;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    right: 6px;
+}
+.layout .courses .container .hovereffect .unsave i{
+    padding-right: 12px;
+    padding-bottom: 3px;
+    color: black;
+    font-size: 30px;
+}
+.layout .courses .container .hovereffect .unsave .drop{
+    font-size: 15px;
+    background-color: rgb(95, 95, 95);
+    color: black;
+    padding: 0px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: none;
+}
+.layout .courses .container .hovereffect .unsave:hover > .drop{
+    display: block;
+}
+.layout .courses .container .hovereffect .save{
+    text-decoration: none;
+    text-align: right;
+    position: absolute;
+    top: 10px;
+    right: 6px;
+}
+.layout .courses .container .hovereffect .save i{
+    padding-right: 10px;
+    padding-bottom: 3px;
+    color: black;
+    font-size: 30px;
+    font-weight: bolder;
+}
+.layout .courses .container .hovereffect .save .drop{
+    font-size: 15px;
+    background-color: rgb(95, 95, 95);
+    color: black;
+    padding: 0px 5px;
+    border: 1px solid black;
+    border-radius: 10px;
+    display: none;
+}
+.layout .courses .container .hovereffect .save:hover > .drop{
+    display: block;
+}
+.layout .courses .container .hovereffect button{
+    font-size: 120%;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: rgb(95, 95, 95);
+    padding: 3px 5px;
+    margin-bottom: 20px;
+}
+.layout .courses .container .hovereffect button:hover{
+    background-color: black;
+    color: rgb(95, 95, 95);
+}
+.layout .courses .container:hover >.hovereffect{
+    display: flex;
+}
+
+/* view course details */
+.layout .viewcoursedetails{
+    position: absolute;
+    top: 160px;
+    left: 450px;
+    background-color: rgb(170, 255, 255);
+    border: 4px solid black;
+    border-radius: 10px;
+    height: 350px;
+    width: 600px;
+    padding: 10px;
+    font-size: 24px;
+    font-weight: bold;
+    z-index: 1;
+    display: none;
+    /* display: flex; */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.layout .viewcoursedetails .cross{
+    position: absolute;
+    top: 4px;
+    right: 15px;
+    font-size: 30px;
+    color: rgb(200, 0, 0);
+}
+.layout .viewcoursedetails .freeimgcontainer{
+    position: absolute;
+    top: 4px;
+    left: 0px;
+}
+.layout .viewcoursedetails .freeimgcontainer img{
+    height: 50px;
+    width: 100px;
+}
+.layout .viewcoursedetails .freeimgcontainer .text{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-55%, -70%);
+    font-size: large;
+    font-weight: bolder;
+    color: black;
+}
+.layout .viewcoursedetails h2{
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.55);
+    border-radius: 3px;
+}
+.layout .viewcoursedetails .details{
+    position: absolute;
+    bottom: 11px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.55);
+    padding: 5px;
+    margin: 10px 10px 5px 10px;;
+    width: 96%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3px; 
+    font-size: 18px;
+}
+.layout .viewcoursedetails .details .column1{
+    padding-left: 5px;
+}
+.layout .viewcoursedetails .details .column2{
+    text-align: right;
+    padding-right: 5px;
+}
+.layout .viewcoursedetails button{
+    position: absolute;
+    bottom: 5px;
+    right: 255px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: rgb(95, 95, 95);
+    padding: 3px 8px;
+}
+.layout .viewcoursedetails button:hover{
+    background-color: black;
+    color: rgb(95, 95, 95);
+}
+
+
+/* categories */
+.layout .categories{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.layout .categories a{
+    text-decoration: none;
+    color: white;
+}
+.layout .categories a:hover{
+    opacity: 0.5;
+}
+.layout .categories span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    height: 200px;
+    width: 325px;
+    border: 2px solid rgb(75, 75, 75);
+    border-radius: 8px;
+    margin: 25px 35px 25px 35px;
+    padding: 8px;
+}
+.layout .categories h1{
+    padding: 0px 5px;
+    border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+}
+.layout .categories .Programming{
+    background-image: url(/static/images/programming.jpg);
+    background-size: cover;
+}
+.layout .categories .Science{
+    background-image: url(/static/images/science.jpg);
+    background-size: cover;
+}
+.layout .categories .Biology{
+    background-image: url(/static/images/biology.jpg);
+    background-size: cover;
+}
+.layout .categories .General{
+    background-image: url(/static/images/generaltrail.jpg);
+    background-size: cover;
+}
+.layout .categories .Food{
+    background-image: url(/static/images/food.jpg);
+    background-size: cover;
+}
+.layout .categories .History{
+    background-image: url(/static/images/history.jpg);
+    background-size: cover;
+}
+.layout .categories .Beauty{
+    background-image: url(/static/images/beauty.jpg);
+    background-size: cover;
+}
+.layout .categories .travel{
+    background-image: url(/image/travel.jpg);
+    background-size: cover;
+}
+.layout .categories .Creativity{
+    background-image: url(/static/images/creativity.jpg);
+    background-size: cover;
+}
+.layout .categories .Philosophy{
+    background-image: url(/static/images/philosophy.jpg);
+    background-size: cover;
+}
+.layout .categories .Psychology{
+    background-image: url(/static/images/psychology.jpg);
+    background-size: cover;
+}
+.layout .categories .Mathematics{
+    background-image: url(/static/images/mathematics.jpg);
+    background-size: cover;
+}
+.layout .categories .Design{
+    background-image: url(/static/images/design.jpg);
+    background-size: cover;
+}
+.layout .categories .Social{
+    background-image: url(/static/images/socialmedia.jpg);
+    background-size: cover;
+}
+.layout .categories .Content{
+    background-image: url(/static/images/content.jpg);
+    background-size: cover;
+}
+.layout .categories .Personal{
+    background-image: url(/static/images/personaldevelopment.jpg);
+    background-size: cover;
+}
+.layout .categories .Health{
+    background-image: url(/static/images/health.jpeg);
+    background-size: cover;
+}
+.layout .categories .Photography{
+    background-image: url(/static/images/photography.jpg);
+    background-size: cover;
+}
+.layout .categories .Computer{
+    background-image: url(/static/images/computer.jpg);
+    background-size: cover;
+}
+.layout .categories .Dance{
+    background-image: url(/static/images/danceandmusic.jpg);
+    background-size: cover;
+}
+.layout .categories .music{
+    background-image: url(/image/music.jpg);
+    background-size: cover;
+}
+.layout .categories .Engineering{
+    background-image: url(/static/images/engineering.jpg);
+    background-size: cover;
+}
+.layout .categories .Fashion{
+    background-image: url(/static/images/fashion.jpg);
+    background-size: cover;
+}
+.layout .categories .veterinary{
+    background-image: url(/image/veterinary.jpg);
+    background-size: cover;
+}
+.layout .categories .horticulture{
+    background-image: url(/image/horticulture.jpg);
+    background-size: cover;
+}
+.layout .categories .diseases{
+    background-image: url(/image/diseases.jpg);
+    background-size: cover;
+}
+.layout .categories .Automobile{
+    background-image: url(/static/images/automobile.jpg);
+    background-size: cover;
+}
+.layout .categories .energy{
+    background-image: url(/image/energy.jpg);
+    background-size: cover;
+}
+.layout .categories .Finance{
+    background-image: url(/static/images/finance.jpg);
+    background-size: cover;
+}
+.layout .categories .Business{
+    background-image: url(/static/images/business.jpeg);
+    background-size: cover;
+}
+.layout .categories .Architecture{
+    background-image: url(/static/images/architecture.jpg);
+    background-size: cover;
+}
+.layout .categories .Literature{
+    background-image: url(/static/images/literature.jpg);
+    background-size: cover;
+}
+
+/* footer */
+footer {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    padding: 10px 0px;
+    background-color: rgb(35, 35, 35);
+    height: 110px;
+    box-sizing: border-box;
+}
+
+.foot {
+    width: 80%;
+    font-size: 80%;
+    margin: auto;
+    text-align: center;
+}
+
+.foot h3 {
+    padding-bottom: 5px;
+}
+
+.copyright {
+    padding-top: 5px;
+    font-size: 90%;
+    font-family: 'Times New Roman';
+}
+
+/* to keep footer where it belongs */
+
+/* footer position absolute banaune ani tala ko step: */
+#page-container {
+    position: relative;
+    /* If the content is smaller than the min-height, 
+    the minimum height will be applied
+    else it has no effect. 
+    i.e, half khali pages ko lagi min height le kam garcha
+    ani full bhariyeko pages ko lagi position relative le.*/
+    min-height: 100vh;
+}
+
+/* login signup page  */
+.loginmain{
+    font-size: 18px;
+}
+.loginmain .bg1{
+    position: fixed;
+    top: 450px;
+    right: 100px;
+    width: 320px;
+    opacity: 0.9;
+}
+.loginmain .bg2{
+    position: fixed;
+    top: 100px;
+    left: 120px;
+    width: 250px;
+    opacity: 0.9;
+}
+/* login page  */
+.loginmain .loginwrapper{
+    position: absolute;
+    top: 130px;
+    right: 540px;
+    height: 420px;
+    width: 350px;
+    background-color: rgb(0, 180, 180);
+    color: black;
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 40px 20px;
+}
+.loginmain .loginwrapper h1{
+    text-align: center;
+    margin: 40px 0px;
+}
+.loginmain .loginwrapper .userpass{
+    position: relative;
+    margin: 20px 0px;
+}
+.loginmain .loginwrapper .userpass input{
+    padding: 8px;
+    width: 95%;
+    height: 100%;
+    border: none;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+.loginmain .loginwrapper .userpass i{
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    /* transform: translateY(-50%); */
+}
+.loginmain .loginwrapper a{
+    color: black;
+    text-align: right;
+}
+.loginmain .loginwrapper a:hover{
+    font-weight: bold;
+}
+.loginmain .loginwrapper .forgotpw{
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: right;
+    font-size: 18px;
+    margin: 20px 0px;
+}
+.loginmain .loginwrapper .button{
+    display: flex;
+    justify-content: center;
+    margin: 30px 0px;
+}
+.loginmain .loginwrapper button{
+    font-size: 25px;
+    width: 70%;
+    border-radius: 30px;
+    padding-bottom: 5px;
+}
+.loginmain .loginwrapper button:hover{
+    background-color: black;
+    color: white;
+} 
+.loginmain .loginwrapper .signup{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+/* signup page  */
+.loginmain .signupwrapper{
+    position: absolute;
+    top: 90px;
+    right: 540px;
+    height: 520px;
+    width: 350px;
+    background-color: rgb(0, 180, 180);
+    color: black;
+    border: 4px solid black;
+    border-radius: 20px;
+    padding: 20px;
+}
+.loginmain .signupwrapper h1{
+    text-align: center;
+    margin: 10px 0px 30px 0px;
+}
+.loginmain .signupwrapper .userpass{
+    position: relative;
+    margin: 20px 0px;
+}
+.loginmain .signupwrapper .userpass input{
+    padding: 8px;
+    width: 95%;
+    height: 100%;
+    border: none;
+    border: 2px solid black;
+    border-radius: 20px;
+}
+.loginmain .signupwrapper .userpass i{
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    /* transform: translateY(-50%); */
+}
+.loginmain .signupwrapper a{
+    color: black;
+    text-align: right;
+}
+.loginmain .signupwrapper a:hover{
+    font-weight: bold;
+}
+.loginmain .signupwrapper .forgotpw{
+    display: flex;
+    /* justify-content: space-around; */
+    justify-content: right;
+    font-size: 18px;
+    margin: 20px 0px;
+}
+.loginmain .signupwrapper .button{
+    display: flex;
+    justify-content: center;
+    margin: 30px 0px;
+}
+.loginmain .signupwrapper button{
+    font-size: 25px;
+    width: 70%;
+    border-radius: 30px;
+    padding-bottom: 5px;
+}
+.loginmain .signupwrapper button:hover{
+    background-color: black;
+    color: white;
+} 
+.loginmain .signupwrapper .signup{
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+}
+    

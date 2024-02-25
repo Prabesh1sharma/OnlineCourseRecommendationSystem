@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" Unlock your potential with our cutting-edge online course recommendation
+    system. Tailored to your unique learning style and goals, our platform utilizes advanced algorithms to suggest
+    the perfect courses for your success. Explore a personalized learning journey that adapts to your preferences,
+    ensuring a seamless and efficient educational experience. Elevate your skills, knowledge, and career prospects
+    with our intelligently curated online courses. Start your transformative learning adventure today!">
+    <meta name="keywords"
+        content="MOOC,recommendation system,search online courses,online course recommendation system">
+    <meta name="author" content="Ocean Sitaula">
+    {% comment %} <link rel="stylesheet" href="css/style.css"> {% endcomment %}
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Online Course Recommendation System</title>
+</head>
+
+<body>
+    <div id="page-container">
+        {% include 'navbar.html' %}
+
+        <main>
+            <div class="layout">
+                <h1>
+                    TOP 50 COURSES
+                    <i class="fa fa-graduation-cap"></i>
+                </h1>
+                <!-- display is none for viewcoursedetails -->
+                {% comment %} <div class="viewcoursedetails">
+                    <div class="freeimgcontainer">
+                        <img src="\static\images\free.png">
+                        <div class="text">FREE</div>
+                    </div>
+                    <div class="cross">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <h2>Course Name Fill </h2> 
+                    <br><br><br>
+                    <div class="details">
+                        <span class="column1">
+                            Genre : fill <br>
+                            Source : fill <br>
+                            Level: fill <br>
+                            Published Year : fill <br>
+                            Instructor : fill <br>
+                        </span>
+                        <span class="column2">
+                            Duration : (fill) hrs <br>	
+                            No of Enrollments : fill <br>
+                            Ratings : fill <br>
+                            No of Reviews : fill <br>   
+                        </span>
+                    </div>
+                    <a href="#">
+                        <button>Open Course</button>
+                    </a> 
+                </div> {% endcomment %}
+
+                <!-- course's boxes : <span class="container">  -->
+
+                <div class="courses">
+                    {% for course_data in courses_data %}
+
+                    <span class="container">
+                        <h2>{{ course_data.1 }}</h2>
+                        <div class="details">
+                            <span class="column1">
+                                Genre : {{ course_data.12 }} <br>
+                                Source : {{ course_data.2 }}
+                            </span>
+                            <span class="column2">
+                                Rating : {{ course_data.9 }} <br>
+                                Level : {{ course_data.6 }}
+                                
+                            </span>
+                        </div>
+                        
+                        <div class="hovereffect">
+                            <div class="freeimgcontainer">
+                                {% if course_data.4 == False %}
+                                <img src="static\images\free.png">
+                                {% comment %} <div>is_paid: {{ course_data.4 }}</div> {% endcomment %}
+                                <div class="text">FREE</div>
+                                {% endif %}
+                            </div>
+                            <!-- either if is paid - 4 -->
+                            <a href="#" class="save">
+                                <i class="fa fa-bookmark-o">
+                                </i>
+                                <div class="drop">Save Course</div>
+                            </a>
+                            <!-- or -->
+                            <!-- <a href="#" class="unsave">
+                                <i class="fa fa-bookmark">
+                                </i>
+                                <div class="drop">Unsave</div>
+                            </a> -->
+                            <a href="#">
+                                <button>View Details</button>
+                            </a>
+                            <a href="{{ course_data.3 }}" target="_blank">
+                                <button>Open Course</button>
+                            </a>
+                        </div>
+                    </span>
+                    {% endfor %}
+                    {% comment %} <span class="container">
+                        <h2>HarvardX: CS50's Introduction to Programming with Python</h2>
+                        <div class="details">
+                            <span class="column1">
+                                Genre : Proramming <br>
+                                Source : EDX
+                            </span>
+                            <span class="column2">
+                                Rating : 4.6 <br>
+                                Level : Beginner
+                            </span>
+                        </div>
+                        <div class="hovereffect">
+                            <div class="freeimgcontainer">
+                                <img src="/image/free.png">
+                                <div class="text">FREE</div>
+                            </div>
+                            <!-- either -->
+                            <a href="#" class="save">
+                                <i class="fa fa-bookmark-o">
+                                </i>
+                                <div class="drop">Save Course</div>
+                            </a>
+                            <!-- or -->
+                            <!-- <a href="#" class="unsave">
+                                <i class="fa fa-bookmark">
+                                </i>
+                                <div class="drop">Unsave</div>
+                            </a> -->
+                            <a href="#">
+                                <button>View Details</button>
+                            </a>
+                            <a href="#">
+                                <button>Open Course</button>
+                            </a>
+                        </div>
+                    </span>
+                    <span class="container">
+                        <h2>HarvardX: CS50's Introduction to Programming with Python</h2>
+                        <div class="details">
+                            <span class="column1">
+                                Genre : Proramming <br>
+                                Source : EDX
+                            </span>
+                            <span class="column2">
+                                Rating : 4.6 <br>
+                                Level : Beginner
+                            </span>
+                        </div>
+                        <div class="hovereffect">
+                            <div class="freeimgcontainer">
+                                <img src="/image/free.png">
+                                <div class="text">FREE</div>
+                            </div>
+                            <!-- either -->
+                            <a href="#" class="save">
+                                <i class="fa fa-bookmark-o">
+                                </i>
+                                <div class="drop">Save Course</div>
+                            </a>
+                            <!-- or -->
+                            <!-- <a href="#" class="unsave">
+                                <i class="fa fa-bookmark">
+                                </i>
+                                <div class="drop">Unsave</div>
+                            </a> -->
+                            <a href="#">
+                                <button>View Details</button>
+                            </a>
+                            <a href="#">
+                                <button>Open Course</button>
+                            </a>
+                        </div>
+                    </span>
+                    <span class="container">
+                        <h2>HarvardX: CS50's Introduction to Programming with Python</h2>
+                        <div class="details">
+                            <span class="column1">
+                                Genre : Proramming <br>
+                                Source : EDX
+                            </span>
+                            <span class="column2">
+                                Rating : 4.6 <br>
+                                Level : Beginner
+                            </span>
+                        </div>
+                        <div class="hovereffect">
+                            <div class="freeimgcontainer">
+                                <img src="/image/free.png">
+                                <div class="text">FREE</div>
+                            </div>
+                            <!-- either -->
+                            <a href="#" class="save">
+                                <i class="fa fa-bookmark-o">
+                                </i>
+                                <div class="drop">Save Course</div>
+                            </a>
+                            <!-- or -->
+                            <!-- <a href="#" class="unsave">
+                                <i class="fa fa-bookmark">
+                                </i>
+                                <div class="drop">Unsave</div>
+                            </a> -->
+                            <a href="#">
+                                <button>View Details</button>
+                            </a>
+                            <a href="#">
+                                <button>Open Course</button>
+                            </a>
+                        </div>
+                    </span>
+                    <span class="container">
+                        <h2>HarvardX: CS50's Introduction to Programming with Python</h2>
+                        <div class="details">
+                            <span class="column1">
+                                Genre : Proramming <br>
+                                Source : EDX
+                            </span>
+                            <span class="column2">
+                                Rating : 4.6 <br>
+                                Level : Beginner
+                            </span>
+                        </div>
+                        <div class="hovereffect">
+                            <div class="freeimgcontainer">
+                                <img src="/image/free.png">
+                                <div class="text">FREE</div>
+                            </div>
+                            <!-- either -->
+                            <a href="#" class="save">
+                                <i class="fa fa-bookmark-o">
+                                </i>
+                                <div class="drop">Save Course</div>
+                            </a>
+                            <!-- or -->
+                            <!-- <a href="#" class="unsave">
+                                <i class="fa fa-bookmark">
+                                </i>
+                                <div class="drop">Unsave</div>
+                            </a> -->
+                            <a href="#">
+                                <button>View Details</button>
+                            </a>
+                            <a href="#">
+                                <button>Open Course</button>
+                            </a>
+                        </div>
+                    </span> {% endcomment %}
+                                 
+                </div>
+
+            </div>
+
+        </main>
+
+
+        <footer>
+            <div class="foot">
+                <u>
+                    <h3>About Us</h3>
+                </u>
+                <p>Our Online Course Recommendation System utilizes advanced algorithms to suggest the perfect courses
+                    considering personalized user preferences.<br> Our platform has been tailored to individual's unique
+                    learning style and goals.
+                </p><br>
+                <p class="copyright">Online Course Recommendation System © 2024</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

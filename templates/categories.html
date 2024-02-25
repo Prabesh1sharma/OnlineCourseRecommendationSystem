@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" Unlock your potential with our cutting-edge online course recommendation
+    system. Tailored to your unique learning style and goals, our platform utilizes advanced algorithms to suggest
+    the perfect courses for your success. Explore a personalized learning journey that adapts to your preferences,
+    ensuring a seamless and efficient educational experience. Elevate your skills, knowledge, and career prospects
+    with our intelligently curated online courses. Start your transformative learning adventure today!">
+    <meta name="keywords"
+        content="MOOC,recommendation system,search online courses,online course recommendation system">
+    <meta name="author" content="Ocean Sitaula">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Online Course Recommendation System</title>
+</head>
+
+<body>
+    <div id="page-container">
+        {% include 'navbar.html' %}
+
+        <main>
+            <div class="layout">
+
+                <div class="categories">
+                    <!-- a href needs to be filled with insidecategory.html  -->
+                    {% for topic in topics %}
+                    <a href="{% url 'categoriesCourseName' %}?genre={{ topic }}">
+                        <span class="{{ topic }}">
+                            <h1>{{ topic }}</h1>
+                        </span>
+                    </a>
+                    {% endfor %}
+                    {% comment %} <a href="insidecategory.html">
+                        <span class="history">
+                            <h1>History</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="travel">
+                            <h1>Travel</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="creativity">
+                            <h1>Arts and Creativity</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="philosophy">
+                            <h1>Philosophy</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="psychology">
+                            <h1>Psychology</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="mathematics">
+                            <h1>Mathematics</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="design">
+                            <h1>Design</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="personaldevelopment">
+                            <h1>Personal Development</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="health">
+                            <h1>Health</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="photography">
+                            <h1>Photography</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="computer">
+                            <h1>Computer</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="dance">
+                            <h1>Dance</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="music">
+                            <h1>Music</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="engineering">
+                            <h1>Engineering</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="fashion">
+                            <h1>Fashion</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="veterinary">
+                            <h1>Veterinary</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="horticulture">
+                            <h1>Horticulture</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="diseases">
+                            <h1>Diseases</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="vehicle">
+                            <h1>Vehicles</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="energy">
+                            <h1>Energy</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="finance">
+                            <h1>Finance</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="business">
+                            <h1>Business</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="architecture">
+                            <h1>Architecture</h1>
+                        </span>
+                    </a>
+                    <a href="insidecategory.html">
+                        <span class="literature">
+                            <h1>Literature</h1>
+                        </span>
+                    </a> {% endcomment %}
+
+
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <footer>
+            <div class="foot">
+                <u>
+                    <h3>About Us</h3>
+                </u>
+                <p>Our Online Course Recommendation System utilizes advanced algorithms to suggest the perfect courses
+                    considering personalized user preferences.<br> Our platform has been tailored to individual's unique
+                    learning style and goals.
+                </p><br>
+                <p class="copyright">Online Course Recommendation System © 2024</p>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
