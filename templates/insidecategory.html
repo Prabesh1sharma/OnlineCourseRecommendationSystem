@@ -75,11 +75,14 @@
                                 {% endif %}
                             </div>
                             <!-- either -->
-                            <a href="#" class="save">
+                            <form action="/saved_courses" method="POST" class="save">{% csrf_token %}
+                                <input type="hidden" name="course_id" value="{{ ID }}">
+                            <button type="submit" class="save">
                                 <i class="fa fa-bookmark-o">
                                 </i>
                                 <div class="drop">Save Course</div>
-                            </a>
+                            </button>
+                        </form>
                             <!-- or -->
                             <!-- <a href="#" class="unsave">
                                 <i class="fa fa-bookmark">

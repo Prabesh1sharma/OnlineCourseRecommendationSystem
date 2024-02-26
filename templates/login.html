@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" Unlock your potential with our cutting-edge online course recommendation
+    system. Tailored to your unique learning style and goals, our platform utilizes advanced algorithms to suggest
+    the perfect courses for your success. Explore a personalized learning journey that adapts to your preferences,
+    ensuring a seamless and efficient educational experience. Elevate your skills, knowledge, and career prospects
+    with our intelligently curated online courses. Start your transformative learning adventure today!">
+    <meta name="keywords"
+        content="MOOC,recommendation system,search online courses,online course recommendation system">
+    <meta name="author" content="Ocean Sitaula">
+    <link rel="stylesheet" href="{% static 'styles/style.css' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Online Course Recommendation System</title>
+</head>
+
+<body>
+    <div id="page-container">
+        {% include 'navbar.html' %}
+        
+
+        <main class="loginmain">
+            <img src="/static/images/loginbg.png" class="bg1">
+            <img src="/static/images/loginbg2.png" class="bg2">
+            {% for message in messages %}
+            
+            <script>
+                Swal.fire({
+                    
+                    
+                    text: "{{ message }}",
+                    
+                  });
+            </script>
+        {% endfor %}
+        
+            
+            
+        
+            
+            <div class="loginwrapper">
+                <h1>Login</h1>
+                <form method="post" action="/login" class="mb-2">
+                    {% csrf_token %}
+                    <div class="userpass">
+                        <input type="text" id="username" name="username" placeholder="Username">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <div class="userpass">
+                        <input type="password" id="pass1" name="pass1" placeholder="Password">
+                        <i class="fa fa-lock"></i>
+                    </div>
+                    
+                    <div class="button">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+                <div class="forgotpw">
+                    <!-- <div class="checkbox">
+                            <input type="checkbox"> Remember Me
+                        </div> -->
+                    <a href="#">Forgot Password?</a>
+                </div>
+                <div class="signup">
+                    Do not have an account? &nbsp;
+                    <a href="/signup">Sign Up</a>
+                </div>
+            </div>
+        </main>
+
+    </div>
+</body>
+
+</html>
