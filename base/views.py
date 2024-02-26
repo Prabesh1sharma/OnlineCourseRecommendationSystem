@@ -270,7 +270,7 @@ def saved_courses(request):
     return render(request, 'saved.html', {'course': courses, 'course_map': course_map})
 
 
-@login_required(login_url= 'signin')
+@login_required(login_url= 'login')
 def sc_delete(request):
     with open('./savedmodels/df.pkl', 'rb') as g:
         df = pickle.load(g)
