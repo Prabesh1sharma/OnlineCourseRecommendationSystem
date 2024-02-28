@@ -10,7 +10,7 @@ from django.contrib.auth.decorators import login_required
 from base.models import Watchlater
 from django.db.models import Case, When
 from django.utils.datastructures import MultiValueDictKeyError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
@@ -286,3 +286,19 @@ def sc_delete(request):
         messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Sourses")
         return redirect('/saved_courses')
     return render(request, 'saved.html', {'obj':course_name})
+
+
+# from django.contrib.auth.views import PasswordResetView
+
+# class CustomPasswordResetView(PasswordResetView):
+#     template_name = 'password_reset_form.html'
+#     html_email_template_name = 'password_reset_email.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         # Add uidb64 and token to the context
+#         uidb64 = self.get_context_data().get('uidb64', '')
+#         token = self.get_context_data().get('token', '')
+#         success_url = self.success_url + f'?uidb64={uidb64}&token={token}'
+
+#         return HttpResponseRedirect(success_url)
