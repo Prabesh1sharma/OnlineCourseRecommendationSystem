@@ -8,24 +8,28 @@
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/search">Search</a></li>
             <li><a href="/categories">Categories</a></li>
-            <li><a href="saved.html">Saved</a></li>
+            <li><a href="/saved_courses">Saved</a></li>
         </ul>
          <!-- either  -->
-         <ul  class="login"><li><a href="login.html">Login</a></li></ul>
+         
         <!-- or -->
-        <!-- <div class="userprofile">
-            <a id="profilepic" href="#"><img src="/image/userprofilepicture.jpg" alt="User"></a>
+        {% if user.is_authenticated %}
+        <div class="userprofile">
+            <a id="profilepic" href="/signout"><img src="/static/images/userprofilepicture.jpg" alt="User"></a>
             <div id="dropdown">
                 <ul>
-                    <li><a href="#">Switch Theme</a></li>
-                    <li><a href="#">Edit Profile</a></li>
+                    {% comment %} <li><a href="#">Switch Theme</a></li>
+                    <li><a href="#">Edit Profile</a></li> {% endcomment %}
                     <hr>
                     <li><a href="#">Log Out</a></li>
                 </ul>
             </div>
-        </div> -->
+        </div>
+        {% else %}
+        <ul  class="login"><li><a href="/login">Login</a></li></ul>
+        {% endif %}
         <div class="searchbox">
-            <form action="/aftersearch" method="POST">
+            <form action="/searchResult" method="POST">
                 {% csrf_token %}
                 <input name="course" type="text" placeholder="Search for Courses" id="course">
 

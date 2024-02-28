@@ -1,8 +1,17 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import pickle
 from pickle import load
 import pandas as pd
 import numpy as np
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.contrib.auth import authenticate, login as auth_login, logout
+from django.contrib.auth.decorators import login_required
+from base.models import Watchlater
+from django.db.models import Case, When
+from django.utils.datastructures import MultiValueDictKeyError
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 def top50(request):
@@ -91,7 +100,10 @@ def SearchRecommendAfterSearch(request):
     if request.method == 'POST':
         try:
             my_dict = request.POST
-            title_name = my_dict['course']
+            title_name = my_dict['course'].strip()
+            if not title_name:
+                error_message = "Please enter something before searching."
+                return render(request, 'aftersearch.html', {'error_message': error_message})
             
 
             num_rec = 6
@@ -107,6 +119,7 @@ def SearchRecommendAfterSearch(request):
                 return render(request, 'aftersearch.html', {'showerror': True, 'coursename': title_name})
         except Exception as e:
             print(e)
+            
             result_df = search_term(title_name)
             if result_df.shape[0] > 6:
                 result_df = result_df.head(6)
@@ -137,3 +150,139 @@ def categoriesCourseName(request):
     course_map = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
 
     return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0})
+
+
+def signup(request):
+
+    if request.method == "POST":
+        username = request.POST['username']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        email = request.POST['email']
+        pass1 = request.POST['pass1']
+        pass2 = request.POST['pass2']
+
+        if User.objects.filter(username=username):
+            messages.error(request, "Username already exist! Please try some other username.")
+            return redirect('/signup')
+        
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email Already Registered!!")
+            return redirect('/signup')
+        
+        if len(username)>20:
+            messages.error(request, "Username must be under 20 charcters!!")
+            return redirect('/signup')
+        
+        if pass1 != pass2:
+            messages.error(request, "Passwords didn't matched!!")
+            return redirect('/signup')
+        
+        if not username.isalnum():
+            messages.error(request, "Username must be Alpha-Numeric!!")
+            return redirect('/signup')
+
+        myuser = User.objects.create_user(username, email, pass1)
+        myuser.first_name = fname
+        myuser.last_name = lname
+        myuser.is_active = True
+        myuser.save()
+        messages.success(request, "Your Account has been created succesfully!!")
+        return redirect('login')
+
+    return render(request, 'signup.html')
+
+
+def login(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        pass1 = request.POST['pass1']
+        
+        user = authenticate(username=username, password=pass1)
+        if user is not None:
+            auth_login(request, user)
+            
+            # messages.success(request, "Logged In Sucessfully!!")
+            return redirect("/")
+        else:
+            messages.error(request, "Password or username Incorrect Try again!!")
+            return redirect('login')
+
+    return render(request, 'login.html')
+
+def signout(request):
+    logout(request)
+    messages.success(request, "Logged Out Successfully!!")
+    return redirect('/login')
+
+@login_required(login_url= 'login')
+def saved_courses(request):
+    with open('./savedmodels/df.pkl', 'rb') as g:
+        df = pickle.load(g)
+    
+    if request.method == "POST":
+        try:
+            user = request.user
+            course_id = request.POST['course_id']
+            watch = Watchlater.objects.filter(user=user)
+            
+            for i in watch:
+                if course_id == i.course_id:
+                    messages.error(request, "This course is already Saved")
+                    
+                    
+                    break
+            else:
+                saved_courses = Watchlater(user=user, course_id=course_id)
+                saved_courses.save()
+                messages.success(request, "Course is Saved Successfully")
+                
+            
+            return redirect("/saved_courses")
+        except MultiValueDictKeyError:
+            messages.error(request, "Invalid request. Please provide a course_id.")
+            return redirect("/saved_courses")  # Redirect to the saved_courses page
+
+    wl = Watchlater.objects.filter(user=request.user)
+    ids = [i.course_id for i in wl]
+    preserved = Case(*[When(pk=pk, then=pos) for pos, pk in enumerate(ids)])
+    courses = Watchlater.objects.filter(course_id__in=ids).order_by(preserved)
+
+    # Assuming df is a pandas DataFrame
+    course_map = []
+    for course_id in ids:
+        ID = int(course_id)
+        course_title = df.loc[df['ID'] == ID, 'course name'].values[0]
+        source = df.loc[df['ID'] == ID, 'source'].values[0]
+        Url = df.loc[df['ID'] == ID, 'Url'].values[0]
+        is_paid = df.loc[df['ID'] == ID, 'is-paid'].values[0]
+        Instructor = df.loc[df['ID'] == ID, 'Instructor'].values[0]
+        level = df.loc[df['ID'] == ID, 'level'].values[0]
+        no_of_enrollment = df.loc[df['ID'] == ID, 'no of enrollments'].values[0]
+        duration = df.loc[df['ID'] == ID, 'duration(hr)'].values[0]
+        rating = df.loc[df['ID'] == ID, 'rating'].values[0]
+        review = df.loc[df['ID'] == ID, 'review'].values[0]
+        published_year = df.loc[df['ID'] == ID, 'published year'].values[0]
+        genre = df.loc[df['ID'] == ID, 'genre'].values[0]
+
+        course_map.append((ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre))
+
+    return render(request, 'saved.html', {'course': courses, 'course_map': course_map})
+
+
+@login_required(login_url= 'login')
+def sc_delete(request):
+    with open('./savedmodels/df.pkl', 'rb') as g:
+        df = pickle.load(g)
+    id = request.POST['course_id']
+    course = get_object_or_404(Watchlater, course_id=id, user=request.user)
+    course_name = df.loc[df['ID'] == int(id), 'course name'].values[0]
+
+    
+    if request.user != course.user:
+        messages.error(request, "Invalid user")
+    if request.method == 'POST':
+        course.delete()
+        messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Sourses")
+        return redirect('/saved_courses')
+    return render(request, 'saved.html', {'obj':course_name})
