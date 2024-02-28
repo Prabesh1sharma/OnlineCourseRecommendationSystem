@@ -48,9 +48,18 @@
                 </h1>
                 
                 {% endif %}
-                <!-- display is none for viewcoursedetails -->
-                {% comment %} <div class="viewcoursedetails">
-                    <h1>Course Name Fill</h1> <br><br><br>
+                <div class="viewcoursedetails">
+                    <div class="freeimgcontainer">
+                        <img src="\static\images\free.png">
+                        <div class="text">FREE</div>
+                    </div>
+                    <div class="cross">
+                        <i class="fa fa-times"></i>
+                    </div>
+                    <div class="headingcontainer">
+                        <h2>Course Name Fill </h2>
+                    </div>
+                    <br><br><br>
                     <div class="details">
                         <span class="column1">
                             Genre : fill <br>
@@ -66,18 +75,10 @@
                             No of Reviews : fill <br>
                         </span>
                     </div>
-                    <div class="freeimgcontainer">
-                        <img src="/image/free.png">
-                        <div class="text">FREE</div>
-                    </div>
-
-                    <div class="cross">
-                        <i class="fa fa-times"></i>
-                    </div>
-
-                </div> {% endcomment %}
-
-                <!-- course's boxes : <span class="container">  -->
+                    <a href="#">
+                        <button>Open Course</button>
+                    </a>
+                </div> 
 
                 <div class="courses">
                     {% if showerror %}
@@ -95,7 +96,9 @@
 
                     {% for ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre in coursemap %}
                     <span class="container">
-                        <h2>{{ course_title }}</h2>
+                        <div class="headingcontainer">
+                            <h2>{{ course_title }}</h2>
+                        </div>
                         <div class="details">
                             <span class="column1">
                                 Genre : {{ genre }} <br>
@@ -111,35 +114,30 @@
                                 {% if is_paid == False %}
                                 <img src="static\images\free.png">
                                 
-                                <div class="text">FREE</div>
+                                <div class="freetext">FREE</div>
                                 {% endif %}
                             </div>
-                            <!-- either -->
-                            <form action="/saved_courses" method="POST" class="save">{% csrf_token %}
-                                <input type="hidden" name="course_id" value="{{ ID }}">
-                            <button type="submit" class="save">
-                                <i class="fa fa-bookmark-o">
-                                </i>
-                                <div class="drop">Save Course</div>
-                            </button>
-                        </form>
-                            <!-- or -->
-                            <!-- <a href="#" class="unsave">
-                                        <i class="fa fa-bookmark">
-                                        </i>
-                                        <div class="drop">Unsave</div>
-                                    </a> -->
+                            <div class="save">
+                                <form action="/saved_courses" method="POST" >{% csrf_token %}
+                                    <input type="hidden" name="course_id" value="{{ ID }}">
+                                <button type="submit" class="save">
+                                    <i class="fa fa-bookmark-o"></i>    
+                                </button>
+                            </form>
+                            </div>
+                        <div class="drop">Save</div>
                             <a href="#">
-                                <button>View Details</button>
+                                <button class="text">View Details</button>
                             </a>
                             <a href="{{ Url }}" target="_blank">
-                                <button>Open Course</button>
+                                <button class="text">Open Course</button>
                             </a>
                         </div>
                     </span>
                     {% endfor %}
                     
                 </div>
+                <br>
             </div>
 
 

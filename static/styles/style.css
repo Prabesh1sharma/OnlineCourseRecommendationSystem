@@ -219,8 +219,11 @@ nav .searchbox{
     display: none;
 }
 
-.searchbox a {
-    padding: 0px 7px 0px 3px;
+.searchbox button {
+    padding: 0px 7px 3px 3px;
+    border: none;
+    border-radius: 20px;
+    background-color: white;
 }
 
 .searchbox .icon {
@@ -300,6 +303,9 @@ main .searchbox .icon {
     width: 100%;
     padding-top: 20px;
 }
+.layout #homepageheading{
+    font-size: 250%;
+}
 .layout h1 {
     text-align: center;
     font-weight: bold;
@@ -322,8 +328,34 @@ main .searchbox .icon {
     font-weight: 100%;
 }
 
-/* course format*/
+/* home page */
+.layout .popularsort{
+    margin: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.layout .popularsort button{
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: rgb(95, 95, 95);
+    padding: 3px 8px;
+    margin: 0px 200px;
+}
+.layout .popularsort .inactive:hover{
+    background-color: black;
+    color: rgb(95, 95, 95);
+}
+.layout .popularsort .active{
+    background-color: black;
+    color: rgb(95, 95, 95);
+    border: 2px solid rgb(95, 95, 95);
+}
 
+/* course format*/
 .layout .courses{
     display: flex;
     justify-content: center;
@@ -342,11 +374,21 @@ main .searchbox .icon {
     border-radius: 8px;
     margin: 12px;
     padding: 8px;
-    background-image: url(/image/1.jpg);
     background-size: cover;
+    background-color: wheat;
+    color: #000;
 }
-.layout .courses .container h2{
+.layout .courses .container .headingcontainer{
+    position: absolute;
+    top: 12px;
+    width: 97%;
+    height: 140px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
+}
+.layout .courses .container .headingcontainer h2{
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 3px;
 }
@@ -355,10 +397,10 @@ main .searchbox .icon {
 }
 .layout .courses .container .details{
     position: absolute;
-    bottom: 3px;
+    bottom: 5px;
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.5);
-    padding-top: 5px;
+    padding: 5px 0px;
     width: 96%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -382,18 +424,20 @@ main .searchbox .icon {
     justify-content: space-around;
     align-items: flex-end;
     display: none;
-    background-color: rgba(253, 240, 213, 0.5);
+    background-color: rgba(170, 255, 255, 0.5);
 }
 .layout .courses .container .hovereffect .freeimgcontainer{
     position: absolute;
     top: 4px;
     left: 0px;
+    z-index: 1;
 }
 .layout .courses .container .hovereffect .freeimgcontainer img{
     height: 50px;
     width: 80px;
+    filter: contrast(2);
 }
-.layout .courses .container .hovereffect .freeimgcontainer .text{
+.layout .courses .container .hovereffect .freeimgcontainer .freetext{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -403,57 +447,66 @@ main .searchbox .icon {
     color: black;
 }
 .layout .courses .container .hovereffect .unsave{
-    text-decoration: none;
+    background-color: rgba(170, 255, 255, 0.1);
     text-align: right;
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 6px;
 }
-.layout .courses .container .hovereffect .unsave i{
-    padding-right: 12px;
-    padding-bottom: 3px;
-    color: black;
-    font-size: 30px;
+.layout .courses .container .hovereffect .unsave button{
+    border: none;
+    background-color: none;
 }
-.layout .courses .container .hovereffect .unsave .drop{
-    font-size: 15px;
+.layout .courses .container .hovereffect .unsave i{
+    color: black;
+    font-size: 35px;
+}
+.layout .courses .container .hovereffect .drop{
+    position: absolute;
+    top: 48px;
+    right: 11px;
     background-color: rgb(95, 95, 95);
     color: black;
+    font-size: 14px;
     padding: 0px 5px;
     border: 1px solid black;
     border-radius: 10px;
     display: none;
 }
-.layout .courses .container .hovereffect .unsave:hover > .drop{
+.layout .courses .container .hovereffect .unsave:hover + .drop{
     display: block;
 }
 .layout .courses .container .hovereffect .save{
-    text-decoration: none;
+    background-color: rgba(170, 255, 255, 0.1);
     text-align: right;
     position: absolute;
-    top: 10px;
-    right: 6px;
+    top: 5px;
+    right: 8px;
+}
+.layout .courses .container .hovereffect .save button{
+    border: none;
+    background-color: none;
 }
 .layout .courses .container .hovereffect .save i{
-    padding-right: 10px;
-    padding-bottom: 3px;
     color: black;
-    font-size: 30px;
-    font-weight: bolder;
+    font-size: 35px;
 }
-.layout .courses .container .hovereffect .save .drop{
-    font-size: 15px;
+.layout .courses .container .hovereffect .drop{
+    position: absolute;
+    top: 48px;
+    right: 11px;
     background-color: rgb(95, 95, 95);
     color: black;
+    font-size: 14px;
     padding: 0px 5px;
     border: 1px solid black;
     border-radius: 10px;
     display: none;
 }
-.layout .courses .container .hovereffect .save:hover > .drop{
+.layout .courses .container .hovereffect .save:hover + .drop{
     display: block;
 }
-.layout .courses .container .hovereffect button{
+.layout .courses .container .hovereffect .text{
     font-size: 120%;
     font-weight: bold;
     border: 2px solid black;
@@ -462,7 +515,7 @@ main .searchbox .icon {
     padding: 3px 5px;
     margin-bottom: 20px;
 }
-.layout .courses .container .hovereffect button:hover{
+.layout .courses .container .hovereffect .text:hover{
     background-color: black;
     color: rgb(95, 95, 95);
 }
@@ -475,14 +528,13 @@ main .searchbox .icon {
     position: absolute;
     top: 160px;
     left: 450px;
-    background-color: rgb(170, 255, 255);
+    background-color: rgb(55, 55, 55);
     border: 4px solid black;
     border-radius: 10px;
     height: 350px;
     width: 600px;
     padding: 10px;
-    font-size: 24px;
-    font-weight: bold;
+    color: rgb(170, 255, 255);
     z-index: 1;
     display: none;
     /* display: flex; */
@@ -495,15 +547,17 @@ main .searchbox .icon {
     top: 4px;
     right: 15px;
     font-size: 30px;
-    color: rgb(200, 0, 0);
+    color: rgb(255, 0, 0);
+    z-index: 2;
 }
 .layout .viewcoursedetails .freeimgcontainer{
     position: absolute;
     top: 4px;
     left: 0px;
+    z-index: 2;
 }
 .layout .viewcoursedetails .freeimgcontainer img{
-    height: 50px;
+    height: 60px;
     width: 100px;
 }
 .layout .viewcoursedetails .freeimgcontainer .text{
@@ -515,19 +569,23 @@ main .searchbox .icon {
     font-weight: bolder;
     color: black;
 }
-.layout .viewcoursedetails h2{
-    padding: 5px 10px 5px 10px;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.55);
+.layout .viewcoursedetails .headingcontainer{
+    position: absolute;
+    top: 60px;
+    width: 97%;
+    height: 140px;
     border-radius: 3px;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 .layout .viewcoursedetails .details{
     position: absolute;
-    bottom: 11px;
+    bottom: 40px;
     border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.55);
     padding: 5px;
-    margin: 10px 10px 5px 10px;;
     width: 96%;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -543,9 +601,9 @@ main .searchbox .icon {
 }
 .layout .viewcoursedetails button{
     position: absolute;
-    bottom: 5px;
+    bottom: 10px;
     right: 255px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
     border: 2px solid black;
     border-radius: 20px;
@@ -558,7 +616,7 @@ main .searchbox .icon {
 }
 
 
-/* categories */
+/* categories page*/
 .layout .categories{
     display: flex;
     justify-content: center;
@@ -720,21 +778,22 @@ main .searchbox .icon {
 }
 
 /* footer */
-footer {
+/* footer{
+    
+} */
+
+.foot {
     position: absolute;
     bottom: 0px;
     right: 0px;
     left: 0px;
     padding: 10px 0px;
+    margin-top: 26px;
     background-color: rgb(35, 35, 35);
     height: 110px;
     box-sizing: border-box;
-}
-
-.foot {
-    width: 80%;
+    width: 100%;
     font-size: 80%;
-    margin: auto;
     text-align: center;
 }
 
