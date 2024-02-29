@@ -33,8 +33,10 @@
                 </h1>
                 <div class="popularsort">
                     <!-- Prabesh!! sun na ..yeta jun button click gareko cha tesailai active banaune ani arko lai inactive-->
-                    <button class="active">On The Basis Of Enrollment</button>
-                    <button class="inactive">On The Basis Of Reviews</button>
+                    <button {% if request.path == '/top50/reviews/' %}class="active"{% endif %} {% if request.path == '/' %}class="active"{% endif %} onclick="window.location.href='{% url 'top50_reviews' %}'">On The Basis Of Reviews</button>
+                    <button {% if request.path == '/top50/enrollment/' %}class="active" {% endif %} onclick="window.location.href='{% url 'top50_enrollment' %}'">On The Basis Of Enrollment</button>
+                    {% comment %} <button class="active" onclick="window.location.href='{% url 'top50_reviews' %}'">On The Basis Of Reviews</button> {% endcomment %}
+
                     <br>
                 </div>
                 <div class="viewcoursedetails">
@@ -87,9 +89,14 @@
                         <div class="hovereffect">
                             <div class="freeimgcontainer">
                                 {% if course_data.4 == False %}
-                                <img src="static\images\free.png">
+                                {% comment %} <img src="static\images\free.png"> {% endcomment %}
+                                <img src="{% static 'images/free.png' %}">
                                 {% comment %} <div>is_paid: {{ course_data.4 }}</div> {% endcomment %}
                                 <div class="freetext">FREE</div>
+                                {% else %}
+                                <img src="{% static 'images/free.png' %}">
+                                <div class="freetext">PAID</div>
+
                                 {% endif %}
                             </div>
                             <!-- unsave ko html ko lagi code starts -->

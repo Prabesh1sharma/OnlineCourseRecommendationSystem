@@ -21,8 +21,9 @@
 <body>
     <div id="page-container">
         {% include 'navbar.html' %}
-
+        
         <main>
+            <h1> Courses for Genre: {{ q }} </h1>
             <div class="layout">
                 <div class="viewcoursedetails">
                     <div class="freeimgcontainer">
@@ -78,6 +79,9 @@
                                 <img src="static\images\free.png">
                                 
                                 <div class="freetext">FREE</div>
+                                {% else %}
+                                <img src="{% static 'images/free.png' %}">
+                                <div class="freetext">PAID</div>
                                 {% endif %}
                             </div>
                             <div class="save">

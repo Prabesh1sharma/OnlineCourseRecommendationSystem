@@ -5,6 +5,8 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('',views.top50),
+    path('top50/enrollment/', views.top50_enrollment, name='top50_enrollment'),
+    path('top50/reviews/', views.top50_reviews, name='top50_reviews'),
     path('search', views.SearchRecommend, name="search"),
     path('searchResult', views.SearchRecommendAfterSearch, name="searchResult"),
     path('categories', views.categories, name="categories"),

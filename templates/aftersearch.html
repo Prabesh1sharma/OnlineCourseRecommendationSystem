@@ -43,11 +43,17 @@
             {% endif %}
             <div class="layout">
                 {% if showtitle %}
-                <h1>
-                    TOP 6 RECOMMENDATIONS FOR "{{coursename}}"
-                </h1>
-                
+                    {% if source == 'recommendations' %}
+                        <h1>
+                            TOP 6 RECOMMENDATIONS FOR "{{coursename}}"
+                        </h1>
+                    {% elif source == 'search_results' %}
+                        <h1>
+                            TOP 6 SEARCH RESULTS FOR "{{coursename}}"
+                        </h1>
+                    {% endif %}
                 {% endif %}
+
                 <div class="viewcoursedetails">
                     <div class="freeimgcontainer">
                         <img src="\static\images\free.png">
@@ -115,6 +121,9 @@
                                 <img src="static\images\free.png">
                                 
                                 <div class="freetext">FREE</div>
+                                {% else %}
+                                <img src="{% static 'images/free.png' %}">
+                                <div class="freetext">PAID</div>
                                 {% endif %}
                             </div>
                             <div class="save">
