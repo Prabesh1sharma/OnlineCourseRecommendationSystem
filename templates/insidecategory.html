@@ -104,7 +104,7 @@
                         <i class="fa fa-times"></i>
                     </button>
                     <div class="headingcontainer">
-                        <h2>Course Name Fill </h2>
+                        <h2>{{ course_title }} </h2>
                     </div>
                     <br><br><br>
                     <div class="details">
@@ -163,9 +163,10 @@
                             </form>
                             </div>
                             <div class="drop">Save</div>
-                            <a href="#">
-                                <button class="text" onclick="showCourseDetails()">View Details</button>
-                            </a>
+                            <form action="/coursedetails" method="POST">{% csrf_token %}
+                                <input type="hidden" name="ID" value="{{ ID }}">
+                                <button class="text" type="submit" onclick="showCourseDetails()">View Details</button>
+                            </form>
                             <a href="{{ Url }}" target="_blank">
                                 <button class="text">Open Course</button>
                             </a>

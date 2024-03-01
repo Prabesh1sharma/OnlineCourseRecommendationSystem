@@ -366,3 +366,35 @@ def sc_delete(request):
 
 #         return HttpResponseRedirect(success_url)
 
+def coursedetails(request):
+    with open('./savedmodels/df.pkl', 'rb') as g:
+        df = pickle.load(g)
+    ID = request.POST['ID']
+    # ID = int(ID)
+    course_title = df.loc[df['ID'] == int(ID), 'course name'].values[0]
+    source = df.loc[df['ID'] == int(ID), 'source'].values[0]
+    Url = df.loc[df['ID'] == int(ID), 'Url'].values[0]
+    is_paid = df.loc[df['ID'] == int(ID), 'is-paid'].values[0]
+    Instructor = df.loc[df['ID'] == int(ID), 'Instructor'].values[0]
+    level = df.loc[df['ID'] == int(ID), 'level'].values[0]
+    no_of_enrollment = df.loc[df['ID'] == int(ID), 'no of enrollments'].values[0]
+    duration = df.loc[df['ID'] == int(ID), 'duration(hr)'].values[0]
+    rating = df.loc[df['ID'] == int(ID), 'rating'].values[0]
+    review = df.loc[df['ID'] == int(ID), 'review'].values[0]
+    published_year = df.loc[df['ID'] == int(ID), 'published year'].values[0]
+    genre = df.loc[df['ID'] == int(ID), 'genre'].values[0]
+
+
+    return render(request, 'insidecategory.html',{'course_title':course_title,
+                                                  'source':source,
+                                                  'Url':Url,
+                                                  'is_paid':is_paid,
+                                                  'Instructor':Instructor,
+                                                  'level':level,
+                                                  'no_of_enrollment':no_of_enrollment,
+                                                  'duration':duration,
+                                                  'rating':rating,
+                                                  'review':review,
+                                                  'published_year':published_year,
+                                                  'genre':genre,
+                                                  })

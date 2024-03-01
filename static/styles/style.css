@@ -508,7 +508,8 @@ main .searchbox .icon {
 
 /* view course details */
 .layout .viewcoursedetails{
-    position: absolute;
+    position: sticky;
+    /* position: absolute; */
     top: 160px;
     left: 450px;
     background-color: rgb(55, 55, 55);
