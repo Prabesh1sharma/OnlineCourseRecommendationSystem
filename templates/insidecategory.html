@@ -24,14 +24,86 @@
 
         <main>
             <div class="layout">
+                <!-- Yo heading ma category name dekhine bana hai -->
+                <h1> Category Name </h1>
+                <div class="sort">
+                    <span>Sort By</span>
+                    <button id="sorticon" onclick="showhideSortList()">
+                        <i class="fa fa-sort-amount-desc"></i>
+                    </button>
+                </div>
+                <div class="sortlist" id="sortlist">
+                    <ul>
+                        <li class="visible">
+                            <button>
+                                Recently Published/Uploaded
+                            </button>
+                        </li>
+                        <li class="visible">
+                            <button>
+                                Free Courses Only
+                            </button>
+                        </li>
+                        <li class="visible">
+                            <button>
+                                Most Popular
+                            </button>
+                        </li>
+                        <li class="visible">
+                            <button onclick="showRating()">
+                                Rating <span>▼</span>
+                            </button>
+                        </li>
+                        <li class="rating">
+                            <button>
+                                <span>►</span> Highest To Lowest
+                            </button>
+                        </li>
+                        <li class="rating2">
+                            <button>
+                                <span>►</span> Lowest To Highest
+                            </button>
+                        </li>
+                        <li class="visible">
+                            <button onclick="showLevel()">
+                                Level <span>▼</span>
+                            </button>
+                        </li>
+                        <li class="level">
+                            <button>
+                                <span>►</span> Beginner To Advanced
+                            </button>
+                        </li>
+                        <li class="level2">
+                            <button>
+                                <span>►</span> Advanced To Beginner
+                            </button>
+                        </li>
+                        <li class="visible">
+                            <button onclick="showDuration()">
+                                Duration <span>▼</span>
+                            </button>
+                        </li>
+                        <li class="duration">
+                            <button>
+                                <span>►</span> Shortest To Longest
+                            </button>
+                        </li>
+                        <li class="duration2">
+                            <button>
+                                <span>►</span> Longest To Shortest
+                            </button>
+                        </li>
+                    </ul>
+                </div>
                 <div class="viewcoursedetails">
                     <div class="freeimgcontainer">
                         <img src="\static\images\free.png">
                         <div class="text">FREE</div>
                     </div>
-                    <div class="cross">
+                    <button class="cross" onclick="hideCourseDetails()">
                         <i class="fa fa-times"></i>
-                    </div>
+                    </button>
                     <div class="headingcontainer">
                         <h2>Course Name Fill </h2>
                     </div>
@@ -52,7 +124,7 @@
                         </span>
                     </div>
                     <a href="#">
-                        <button>Open Course</button>
+                        <button class="open">Open Course</button>
                     </a>
                 </div> 
 
@@ -90,7 +162,7 @@
                             </div>
                             <div class="drop">Save</div>
                             <a href="#">
-                                <button class="text">View Details</button>
+                                <button class="text" onclick="showCourseDetails()">View Details</button>
                             </a>
                             <a href="{{ Url }}" target="_blank">
                                 <button class="text">Open Course</button>
@@ -119,6 +191,7 @@
             </div>
         </footer>
     </div>
+    <script type="text/javascript" src="{% static 'js/scripts.js' %}"></script>
 </body>
 
 </html>

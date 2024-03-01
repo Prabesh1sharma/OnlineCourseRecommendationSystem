@@ -145,49 +145,48 @@ a#hamburger_menu {
 
 .userprofile {
     position: absolute;
-    top: 0px;
+    top: 10px;
     right: 0px;
 }
-
-a#profilepic {
+button#profilepic {
     padding: 0px 25px 0px 10px;
+    background-color: rgb(100, 255, 255);
+    border: none;
 }
-
 #profilepic img {
     height: 33px;
     border: 2px solid black;
     border-radius: 50%;
 }
-
-.userprofile:hover>#dropdown {
-    display: block;
-}
-
 #dropdown {
     display: none;
     background-color: rgb(100, 255, 255);
+    align-items: center;
+    justify-content: center;
     border: 3px solid black;
     border-radius: 5px;
-    width: 170px;
+    width: 100px;
     position: absolute;
-    top: 49px;
+    top: 50px;
     right: 10px;
 }
-
 #dropdown li {
     display: block;
+    padding: 5px;
 }
-
 #dropdown hr {
     border: none;
     border-top: 1px double #000;
 }
-
 #dropdown a {
     font-size: medium;
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
 }
-
-
+#dropdown a:hover{
+    font-weight: bold;
+}
 
 /* searchbox */
 
@@ -312,20 +311,7 @@ main .searchbox .icon {
 .layout h1 i{
     padding: 0p 8px;
 }
-.layout .selecttoremove a.ellipsis{
-    margin-bottom: 10px;
-    display: block;
-    text-decoration: none;
-    text-align: right;
-}
-.layout .selecttoremove .ellipsis i{
-    border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.235);
-    padding: 2px 10px 0px 10px;
-    color: black;
-    font-size: 25px;
-    font-weight: 100%;
-}
+
 
 /* home page */
 .layout .popularsort{
@@ -333,25 +319,25 @@ main .searchbox .icon {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 98%;
 }
 .layout .popularsort button{
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
     border: 2px solid black;
-    border-radius: 20px;
-    background-color: rgb(95, 95, 95);
-    padding: 3px 8px;
-    margin: 0px 200px;
+    border-radius: 6px;
+    background-color: black;
+    color: rgb(95, 95, 95);
+    padding: 3px 40px;
+    margin: 0px 30px;
+    border: 1px solid black;
 }
 .layout .popularsort .inactive:hover{
-    background-color: black;
-    color: rgb(95, 95, 95);
+    border: 1px solid rgb(95, 95, 95);
 }
 .layout .popularsort .active{
-    background-color: black;
-    color: rgb(95, 95, 95);
-    border: 2px solid rgb(95, 95, 95);
+    border: 2px solid white;
 }
 
 /* course format*/
@@ -375,6 +361,7 @@ main .searchbox .icon {
     padding: 8px;
     background-size: cover;
     background-color: wheat;
+    background-color: blanchedalmond;
     color: #000;
 }
 .layout .courses .container .headingcontainer{
@@ -429,12 +416,10 @@ main .searchbox .icon {
     position: absolute;
     top: 4px;
     left: 0px;
-    z-index: 1;
 }
 .layout .courses .container .hovereffect .freeimgcontainer img{
     height: 50px;
     width: 80px;
-    filter: contrast(2);
 }
 .layout .courses .container .hovereffect .freeimgcontainer .freetext{
     position: absolute;
@@ -446,24 +431,23 @@ main .searchbox .icon {
     color: black;
 }
 .layout .courses .container .hovereffect .unsave{
-    background-color: rgba(170, 255, 255, 0.1);
     text-align: right;
     position: absolute;
-    top: 5px;
-    right: 6px;
+    top: 10px;
+    right: 16px;
 }
 .layout .courses .container .hovereffect .unsave button{
+    background-color: rgba(170, 255, 255, 0.1);
     border: none;
-    background-color: none;
 }
 .layout .courses .container .hovereffect .unsave i{
     color: black;
     font-size: 35px;
 }
-.layout .courses .container .hovereffect .drop{
+.layout .courses .container .hovereffect #unsavedrop{
     position: absolute;
     top: 48px;
-    right: 11px;
+    right: 6px;
     background-color: rgb(95, 95, 95);
     color: black;
     font-size: 14px;
@@ -472,11 +456,10 @@ main .searchbox .icon {
     border-radius: 10px;
     display: none;
 }
-.layout .courses .container .hovereffect .unsave:hover + .drop{
+.layout .courses .container .hovereffect .unsave:hover + #unsavedrop{
     display: block;
 }
 .layout .courses .container .hovereffect .save{
-    background-color: rgba(170, 255, 255, 0.1);
     text-align: right;
     position: absolute;
     top: 5px;
@@ -484,7 +467,7 @@ main .searchbox .icon {
 }
 .layout .courses .container .hovereffect .save button{
     border: none;
-    background-color: none;
+    background-color: rgba(170, 255, 255, 0.1);
 }
 .layout .courses .container .hovereffect .save i{
     color: black;
@@ -541,13 +524,18 @@ main .searchbox .icon {
     justify-content: center;
     align-items: center;
 }
-.layout .viewcoursedetails .cross{
+.layout .viewcoursedetails button.cross{
     position: absolute;
-    top: 4px;
+    top: 8px;
     right: 15px;
     font-size: 30px;
     color: rgb(255, 0, 0);
+    background-color: rgb(55, 55, 55);
+    border: none;
     z-index: 2;
+}
+.layout .viewcoursedetails button.cross:hover{
+    font-size : 32px;
 }
 .layout .viewcoursedetails .freeimgcontainer{
     position: absolute;
@@ -598,7 +586,7 @@ main .searchbox .icon {
     text-align: right;
     padding-right: 5px;
 }
-.layout .viewcoursedetails button{
+.layout .viewcoursedetails button.open{
     position: absolute;
     bottom: 10px;
     right: 255px;
@@ -609,7 +597,7 @@ main .searchbox .icon {
     background-color: rgb(95, 95, 95);
     padding: 3px 8px;
 }
-.layout .viewcoursedetails button:hover{
+.layout .viewcoursedetails button.open:hover{
     background-color: black;
     color: rgb(95, 95, 95);
 }
@@ -647,6 +635,86 @@ main .searchbox .icon {
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 3px;
 }
+
+/* inside categories  */
+.layout .sort{
+    text-align: right;
+}
+.layout .sort span{
+    font-size: 25px;
+}
+.layout .sort button#sorticon{
+    margin: 5px 0px;
+    background-color: rgb(55, 55, 55);
+    border: none;
+}
+.layout .sort #sorticon i{
+    background-color: antiquewhite;
+    border: 1px solid black;
+    border-radius: 2px;
+    padding: 4px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.layout .sortlist{
+    display: none;
+    /* display: flex; */
+    justify-content: right;
+    position: absolute;
+    top: 160px;
+    right: 19px;
+    color: black;
+    z-index: 1;
+}
+.layout .sortlist ul{
+    background-color: rgb(55, 55, 55);
+    border: 1px solid black;
+    border-radius: 4px;
+    list-style: none;
+}
+.layout .sortlist li{
+    margin: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.layout .sortlist li.rating{
+    display: none;
+}
+.layout .sortlist li.level{
+    display: none;
+}
+.layout .sortlist li.duration{
+    display: none;
+}
+.layout .sortlist li.rating2{
+    display: none;
+}
+.layout .sortlist li.level2{
+    display: none;
+}
+.layout .sortlist li.duration2{
+    display: none;
+}
+.layout .sortlist span{
+    font-size: 16px;
+}
+.layout .sortlist li button{
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    background-color: rgb(100, 255, 255);
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 0px 40px;
+}
+.layout .sortlist li button:hover{
+    background-color: rgb(0, 180, 180);
+    border: 1px solid black;
+}
+
+/* bg images */
 .layout .categories .Programming{
     background-image: url(/static/images/programming.jpg);
     background-size: cover;
@@ -777,9 +845,6 @@ main .searchbox .icon {
 }
 
 /* footer */
-/* footer{
-    
-} */
 
 .foot {
     position: absolute;
@@ -976,3 +1041,7 @@ main .searchbox .icon {
     font-size: 18px;
 }
     
+/* for js */
+.show{
+    display: flex !important;
+}
