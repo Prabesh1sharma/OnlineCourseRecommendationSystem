@@ -81,9 +81,7 @@
                             No of Reviews : fill <br>
                         </span>
                     </div>
-                    <a href="#">
-                        <button class="open">Open Course</button>
-                    </a>
+                    <a href="#" target="_blank" class="open">Open Course</a>
                 </div> 
 
                 <div class="courses">
@@ -135,9 +133,9 @@
                             </form>
                             </div>
                         <div class="drop">Save</div>
-                            <a href="#">
-                                <button class="text" onclick="showCourseDetails()">View Details</button>
-                            </a>
+                            {% comment %} <a href="#"> {% endcomment %}
+                                <button class="text" onclick="showCourseDetails('{{ ID }}')">View Details</button>
+                            {% comment %} </a> {% endcomment %}
                             <a href="{{ Url }}" target="_blank">
                                 <button class="text">Open Course</button>
                             </a>

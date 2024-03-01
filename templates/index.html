@@ -24,7 +24,6 @@
 <body>
     <div id="page-container">
         {% include 'navbar.html' %}
-
         <main>
             <div class="layout">
                 <h1 id="homepageheading">
@@ -66,13 +65,15 @@
                             No of Reviews : fill <br>   
                         </span>
                     </div>
-                    <a href="#">
+                    {% comment %} <a href="#" target="_blank">
                         <button class="open">Open Course</button>
-                    </a> 
+                    </a>  {% endcomment %}
+                    <a href="#" target="_blank" class="open">Open Course</a>
                 </div> 
                 <div class="courses">
                     {% for course_data in courses_data %}
                     <span class="container">
+                        
                         
                         <div class="headingcontainer">
                             <h2>{{ course_data.1 }}</h2>
@@ -110,7 +111,12 @@
                             </div>
                             <div class="drop">Save</div>
                             
-                            <button class='text' onclick="showCourseDetails()">View Details</button>
+                            
+                            {% comment %} <button class='text' onclick="showCourseDetails()">View Details</button> {% endcomment %}
+                            {% comment %} <a href="#" onclick="showCourseDetails('{{ course_data.0 }}')">
+                                <button class="text">View Details</button>
+                            </a> {% endcomment %}
+                            <button class="text" onclick="showCourseDetails('{{ course_data.0 }}')">View Details</button>
                             <a href="{{ course_data.3 }}" target="_blank">
                                 <button class='text'>Open Course</button>
                             </a>

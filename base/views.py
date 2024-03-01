@@ -13,6 +13,9 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+import json
+from django.http import JsonResponse, HttpResponseBadRequest
+
 
 # Create your views here.
 def top50(request):
@@ -366,35 +369,61 @@ def sc_delete(request):
 
 #         return HttpResponseRedirect(success_url)
 
+# def coursedetails(request):
+#     with open('./savedmodels/df.pkl', 'rb') as g:
+#         df = pickle.load(g)
+#     ID = request.GET.get('ID')
+    
+#     course_title = df.loc[df['ID'] == int(ID), 'course name'].values[0]
+#     source = df.loc[df['ID'] == int(ID), 'source'].values[0]
+#     Url = df.loc[df['ID'] == int(ID), 'Url'].values[0]
+#     is_paid = df.loc[df['ID'] == int(ID), 'is-paid'].values[0]
+#     Instructor = df.loc[df['ID'] == int(ID), 'Instructor'].values[0]
+#     level = df.loc[df['ID'] == int(ID), 'level'].values[0]
+#     no_of_enrollment = df.loc[df['ID'] == int(ID), 'no of enrollments'].values[0]
+#     duration = df.loc[df['ID'] == int(ID), 'duration(hr)'].values[0]
+#     rating = df.loc[df['ID'] == int(ID), 'rating'].values[0]
+#     review = df.loc[df['ID'] == int(ID), 'review'].values[0]
+#     published_year = df.loc[df['ID'] == int(ID), 'published year'].values[0]
+#     genre = df.loc[df['ID'] == int(ID), 'genre'].values[0]
+#     is_paid_str = str(is_paid)
+#     no_of_enrollment_int = int(no_of_enrollment)
+#     duration_int = int(duration)
+#     rating_int = int(rating)
+#     review_int = int(review)
+#     course_details = {
+#         'course_title': course_title,
+#         'source': source,
+#         'Url': Url,
+#         'is_paid': bool(is_paid),
+#         'Instructor': Instructor,
+#         'level': level,
+#         'no_of_enrollment': no_of_enrollment,
+#         'duration': duration,
+#         'rating': rating,
+#         'review': review,
+#         'published_year': published_year,
+#         'genre': genre,
+#     }
+
+#     return JsonResponse(course_details)
+    
+
 def coursedetails(request):
-    with open('./savedmodels/df.pkl', 'rb') as g:
-        df = pickle.load(g)
-    ID = request.POST['ID']
-    # ID = int(ID)
-    course_title = df.loc[df['ID'] == int(ID), 'course name'].values[0]
-    source = df.loc[df['ID'] == int(ID), 'source'].values[0]
-    Url = df.loc[df['ID'] == int(ID), 'Url'].values[0]
-    is_paid = df.loc[df['ID'] == int(ID), 'is-paid'].values[0]
-    Instructor = df.loc[df['ID'] == int(ID), 'Instructor'].values[0]
-    level = df.loc[df['ID'] == int(ID), 'level'].values[0]
-    no_of_enrollment = df.loc[df['ID'] == int(ID), 'no of enrollments'].values[0]
-    duration = df.loc[df['ID'] == int(ID), 'duration(hr)'].values[0]
-    rating = df.loc[df['ID'] == int(ID), 'rating'].values[0]
-    review = df.loc[df['ID'] == int(ID), 'review'].values[0]
-    published_year = df.loc[df['ID'] == int(ID), 'published year'].values[0]
-    genre = df.loc[df['ID'] == int(ID), 'genre'].values[0]
+    if request.method == 'GET':
+        # Get the course ID from the query parameters
+        ID = request.GET.get('ID')
 
+        # Assuming you have a DataFrame named 'df'
+        with open('./savedmodels/df.pkl', 'rb') as g:
+            df = pickle.load(g)
 
-    return render(request, 'insidecategory.html',{'course_title':course_title,
-                                                  'source':source,
-                                                  'Url':Url,
-                                                  'is_paid':is_paid,
-                                                  'Instructor':Instructor,
-                                                  'level':level,
-                                                  'no_of_enrollment':no_of_enrollment,
-                                                  'duration':duration,
-                                                  'rating':rating,
-                                                  'review':review,
-                                                  'published_year':published_year,
-                                                  'genre':genre,
-                                                  })
+        # Retrieve course details based on the ID
+        course_details = df[df['ID'] == int(ID)].to_dict(orient='records')[0]
+
+        # Return course details as JSON response
+        return JsonResponse(course_details)
+    else:
+        # Handle other HTTP methods if needed
+        return HttpResponseBadRequest("Invalid HTTP method")
+    

@@ -109,7 +109,7 @@
                     <br><br><br>
                     <div class="details">
                         <span class="column1">
-                            Genre : fill <br>
+                            Genre : {{ genre }} <br>
                             Source : fill <br>
                             Level: fill <br>
                             Published Year : fill <br>
@@ -122,9 +122,7 @@
                             No of Reviews : fill <br>
                         </span>
                     </div>
-                    <a href="#">
-                        <button class="open">Open Course</button>
-                    </a>
+                    <a href="#" target="_blank" class="open">Open Course</a>
                 </div> 
 
                 <div class="courses">
@@ -163,10 +161,10 @@
                             </form>
                             </div>
                             <div class="drop">Save</div>
-                            <form action="/coursedetails" method="POST">{% csrf_token %}
-                                <input type="hidden" name="ID" value="{{ ID }}">
-                                <button class="text" type="submit" onclick="showCourseDetails()">View Details</button>
-                            </form>
+                            {% comment %} <form action="/coursedetails" method="POST">{% csrf_token %}
+                                <input type="hidden" name="ID" value="{{ ID }}"> {% endcomment %}
+                                <button class="text" onclick="showCourseDetails('{{ ID }}')">View Details</button>
+                            {% comment %} </form> {% endcomment %}
                             <a href="{{ Url }}" target="_blank">
                                 <button class="text">Open Course</button>
                             </a>
