@@ -90,10 +90,13 @@
                             <div class="hovereffect">
                                 <div class="freeimgcontainer">
                                     {% if is_paid == False %}
-                                <img src="static\images\free.png">
-                                
-                                <div class="freetext">FREE</div>
-                                {% endif %}
+                                    <img src="static\images\free.png">
+                                    
+                                    <div class="freetext">FREE</div>
+                                    {% else %}
+                                    <img src="{% static 'images/free.png' %}">
+                                    <div class="freetext">PAID</div>
+                                    {% endif %}
                                 </div>
                                 <div class="unsave">
                                     <form action="/sc_delete" method="POST">{% csrf_token %}

@@ -10,13 +10,76 @@ from django.contrib.auth.decorators import login_required
 from base.models import Watchlater
 from django.db.models import Case, When
 from django.utils.datastructures import MultiValueDictKeyError
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 # Create your views here.
 def top50(request):
     # Load the DataFrame from the pickle file
     with open('./savedmodels/popular_df_review.pkl', 'rb') as f:
+        popular_df = load(f)
+
+    # Extract the columns from the DataFrame
+    ID = list(popular_df['ID'].values)
+    course_title = list(popular_df['course name'].values)
+    source = list(popular_df['source'].values)
+    Url = list(popular_df['Url'].values)
+    is_paid = list(popular_df['is-paid'].values)
+    Instructor = list(popular_df['Instructor'].values)
+    level = list(popular_df['level'].values)
+    no_of_enrollment = list(popular_df['no of enrollments'].values)
+    duration = list(popular_df['duration(hr)'].values)
+    rating = list(popular_df['rating'].values)
+    review = list(popular_df['review'].values)
+    published_year = list(popular_df['published year'].values)
+    genre = list(popular_df['genre'].values)
+
+
+    # Zip the lists
+    courses_data = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
+
+    # Pass the zipped list as context to the template
+    context = {
+        'courses_data': courses_data,
+    }
+
+    return render(request, 'index.html',context)
+
+def top50_reviews(request):
+    # Load the DataFrame from the pickle file
+    with open('./savedmodels/popular_df_review.pkl', 'rb') as f:
+        popular_df = load(f)
+
+    # Extract the columns from the DataFrame
+    ID = list(popular_df['ID'].values)
+    course_title = list(popular_df['course name'].values)
+    source = list(popular_df['source'].values)
+    Url = list(popular_df['Url'].values)
+    is_paid = list(popular_df['is-paid'].values)
+    Instructor = list(popular_df['Instructor'].values)
+    level = list(popular_df['level'].values)
+    no_of_enrollment = list(popular_df['no of enrollments'].values)
+    duration = list(popular_df['duration(hr)'].values)
+    rating = list(popular_df['rating'].values)
+    review = list(popular_df['review'].values)
+    published_year = list(popular_df['published year'].values)
+    genre = list(popular_df['genre'].values)
+
+
+    # Zip the lists
+    courses_data = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
+
+    # Pass the zipped list as context to the template
+    context = {
+        'courses_data': courses_data,
+    }
+
+    return render(request, 'index.html',context)
+
+def top50_enrollment(request):
+    # Load the DataFrame from the pickle file
+    with open('./savedmodels/popular_df_enrollment.pkl', 'rb') as f:
         popular_df = load(f)
 
     # Extract the columns from the DataFrame
@@ -71,7 +134,7 @@ def search_term(term):
     with open('./savedmodels/df.pkl', 'rb') as g:
         df = load(g)
     result_df = df[df['course name'].str.contains(term, case=False)]
-    top_6 = result_df.sort_values(by='review', ascending=False).head(6)
+    top_6 = result_df.sort_values(by='review', ascending=False).head(7)
     return top_6
 
 def extract_features(rec_df):
@@ -106,7 +169,7 @@ def SearchRecommendAfterSearch(request):
                 return render(request, 'aftersearch.html', {'error_message': error_message})
             
 
-            num_rec = 6
+            num_rec = 7
 
             rec_df = recommend_course(title_name, num_rec)
             ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre = extract_features(rec_df)
@@ -114,19 +177,19 @@ def SearchRecommendAfterSearch(request):
             dict_map = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
 
             if any(dict_map):
-                return render(request, 'aftersearch.html', {'coursemap': dict_map, 'coursename': title_name, 'showtitle': True})
+                return render(request, 'aftersearch.html', {'coursemap': dict_map, 'coursename': title_name, 'showtitle': True, 'source': 'recommendations'})
             else:
                 return render(request, 'aftersearch.html', {'showerror': True, 'coursename': title_name})
         except Exception as e:
             print(e)
             
             result_df = search_term(title_name)
-            if result_df.shape[0] > 6:
-                result_df = result_df.head(6)
+            if result_df.shape[0] > 7:
+                result_df = result_df.head(7)
             ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre = extract_features(result_df)
             course_map = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
             if any(course_map):
-                return render(request, 'aftersearch.html', {'coursemap': course_map, 'coursename': title_name, 'showtitle': True})
+                return render(request, 'aftersearch.html', {'coursemap': course_map, 'coursename': title_name, 'showtitle': True, 'source': 'search_results'})
             else:
                 return render(request, 'aftersearch.html', {'showerror': True, 'coursename': title_name})
 
@@ -149,7 +212,7 @@ def categoriesCourseName(request):
     ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre = extract_features(rec_df)
     course_map = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
 
-    return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0})
+    return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0,'q':q})
 
 
 def signup(request):
@@ -286,3 +349,20 @@ def sc_delete(request):
         messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Sourses")
         return redirect('/saved_courses')
     return render(request, 'saved.html', {'obj':course_name})
+
+
+# from django.contrib.auth.views import PasswordResetView
+
+# class CustomPasswordResetView(PasswordResetView):
+#     template_name = 'password_reset_form.html'
+#     html_email_template_name = 'password_reset_email.html'
+
+#     def get_context_data(self, **kwargs):
+#         context = super().get_context_data(**kwargs)
+#         # Add uidb64 and token to the context
+#         uidb64 = self.get_context_data().get('uidb64', '')
+#         token = self.get_context_data().get('token', '')
+#         success_url = self.success_url + f'?uidb64={uidb64}&token={token}'
+
+#         return HttpResponseRedirect(success_url)
+

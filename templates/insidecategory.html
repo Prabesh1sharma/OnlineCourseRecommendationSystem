@@ -21,11 +21,10 @@
 <body>
     <div id="page-container">
         {% include 'navbar.html' %}
-
+        
         <main>
             <div class="layout">
-                <!-- Yo heading ma category name dekhine bana hai -->
-                <h1> Category Name </h1>
+                <h1> Courses for Genre: {{ q }} </h1>
                 <div class="sort">
                     <span>Sort By</span>
                     <button id="sorticon" onclick="showhideSortList()">
@@ -150,6 +149,9 @@
                                 <img src="static\images\free.png">
                                 
                                 <div class="freetext">FREE</div>
+                                {% else %}
+                                <img src="{% static 'images/free.png' %}">
+                                <div class="freetext">PAID</div>
                                 {% endif %}
                             </div>
                             <div class="save">

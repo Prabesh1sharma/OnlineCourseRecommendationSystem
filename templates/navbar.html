@@ -5,10 +5,14 @@
             <i class="fa fa-bars"></i>
         </a>
         <ul class="navcontents">
-            <li class="active"><a href="/">Home</a></li>
+            {% comment %} <li class="active"><a href="/">Home</a></li>
             <li><a href="/search">Search</a></li>
             <li><a href="/categories">Categories</a></li>
-            <li><a href="/saved_courses">Saved</a></li>
+            <li><a href="/saved_courses">Saved</a></li> {% endcomment %}
+            <li {% if request.path == '/' %}class="active"{% endif %} {% if request.path == '/top50/reviews/' %}class="active"{% endif %} {% if request.path == '/top50/enrollment/' %}class="active" {% endif %}><a href="/">Home</a></li>
+            <li {% if request.path == '/search' %}class="active"{% endif %} {% if request.path == '/searchResult' %}class="active"{% endif %}><a href="/search">Search</a></li>
+            <li {% if request.path == '/categories' %}class="active"{% endif %} {% if request.path == '/categoriesCourseName' %}class="active"{% endif %}><a href="/categories">Categories</a></li>
+            <li {% if request.path == '/saved_courses' %}class="active"{% endif %} {% if request.path == '/saved_courses' %}class="active"{% endif %}><a href="/saved_courses">Saved</a></li>
         </ul>
          <!-- either  -->
          
