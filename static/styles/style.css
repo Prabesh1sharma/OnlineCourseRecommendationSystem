@@ -5,7 +5,6 @@
 }
 body {
     background-color: rgb(55, 55, 55);
-    
     color: white;
 }
 main{
@@ -195,7 +194,6 @@ button#profilepic {
 .searchbox{
     background-color: white;
 }
-
 nav .searchbox{
     border: 2px solid black;
     border-radius: 20px;
@@ -203,7 +201,6 @@ nav .searchbox{
     top: 14px;
     right: 95px;
 }
-
 .searchbox input {
     width: 200px;
     height: 30px;
@@ -213,23 +210,19 @@ nav .searchbox{
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;
 }
-
 .searchbox input::-webkit-search-cancel-button {
     display: none;
 }
-
 .searchbox button {
     padding: 0px 7px 3px 3px;
     border: none;
     border-radius: 20px;
     background-color: white;
 }
-
 .searchbox .icon {
     font-size: 16px;
     color: black;
 }
-
 .searchbox a:hover .icon {
     font-weight: bold;
 }
@@ -241,7 +234,6 @@ main .searchbox {
     border: 3px solid black;
     border-radius: 30px;
 }
-
 main .searchbox input {
     width: 500px;
     height: 35px;
@@ -249,11 +241,9 @@ main .searchbox input {
     font-size: 150%;
     text-align: center;
 }
-
 main .searchbox a {
     padding: 0px 15px 0px 0px;
 }
-
 main .searchbox .icon {
     font-size: 28px;
 }
@@ -378,6 +368,7 @@ main .searchbox .icon {
 .layout .courses .container .headingcontainer h2{
     background-color: rgba(0, 0, 0, 0.5);
     border-radius: 3px;
+    padding: 0px 3px;
 }
 .layout .courses .container img{
     opacity: 0.5;
@@ -508,7 +499,7 @@ main .searchbox .icon {
 
 /* view course details */
 .layout .viewcoursedetails{
-    position: absolute;
+    position: sticky;
     top: 160px;
     left: 450px;
     background-color: rgb(55, 55, 55);
@@ -971,6 +962,40 @@ main .searchbox .icon {
     display: flex;
     justify-content: center;
     font-size: 18px;
+}
+/* reset password */
+.loginmain .loginwrapper .lessmargin{
+    text-align: center;
+    margin: 0px;
+}
+.loginmain .loginwrapper h3{
+    text-align: center;
+}
+.loginmain .loginwrapper .click{
+    font-size: 25px;
+    width: 70%;
+    border-radius: 30px;
+    padding-bottom: 5px;
+}
+.loginmain .loginwrapper .click:hover{
+    background-color: black;
+    color: white;
+} 
+.loginmain .loginwrapper .info{
+    margin: 50px 0px;
+    font-size: 25px;
+    text-align: center;
+}
+.loginmain .loginwrapper .info1{
+    margin: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+.loginmain .loginwrapper .info2{
+    margin: 10px 0px;
+    font-size: 20px;
+    text-align: justify;
 }
 /* signup page  */
 .loginmain .signupwrapper{

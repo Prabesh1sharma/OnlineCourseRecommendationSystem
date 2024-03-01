@@ -28,21 +28,12 @@
             <img src="/static/images/loginbg.png" class="bg1">
             <img src="/static/images/loginbg2.png" class="bg2">
             {% for message in messages %}
-            
             <script>
                 Swal.fire({
-                    
-                    
                     text: "{{ message }}",
-                    
                   });
             </script>
-        {% endfor %}
-        
-            
-            
-        
-            
+        {% endfor %}        
             <div class="loginwrapper">
                 <h1>Login</h1>
                 <form method="post" action="/login" class="mb-2">
