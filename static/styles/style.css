@@ -499,7 +499,7 @@ main .searchbox .icon {
 
 /* view course details */
 .layout .viewcoursedetails{
-    position: sticky;
+    position: fixed;
     /* position: absolute; */
     top: 160px;
     left: 450px;
@@ -687,6 +687,12 @@ main .searchbox .icon {
     display: none;
 }
 .layout .sortlist li.level2{
+    display: none;
+}
+.layout .sortlist li.level3{
+    display: none;
+}
+.layout .sortlist li.level4{
     display: none;
 }
 .layout .sortlist li.duration2{

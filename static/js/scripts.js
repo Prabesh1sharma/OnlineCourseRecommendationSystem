@@ -56,6 +56,8 @@ function showRating(){
 function showLevel(){
     document.querySelector(".layout .sortlist li.level").classList.toggle("show");
     document.querySelector(".layout .sortlist li.level2").classList.toggle("show");
+    document.querySelector(".layout .sortlist li.level3").classList.toggle("show");
+    document.querySelector(".layout .sortlist li.level4").classList.toggle("show");
 }
 function showDuration(){
     document.querySelector(".layout .sortlist li.duration").classList.toggle("show");

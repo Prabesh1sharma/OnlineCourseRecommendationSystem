@@ -212,10 +212,35 @@ def categoriesCourseName(request):
 
     q = request.GET.get('genre', '')
     rec_df = df[df['genre'].str.contains(q, case=False)]
+    sort_option = request.GET.get('sort', 'default')
+    if sort_option == 'recently_uploaded':
+        rec_df = rec_df.sort_values(by='published year', ascending=False)
+    elif sort_option == 'free_courses':
+        rec_df = rec_df[rec_df['is-paid'] == False]
+    elif sort_option == 'most_popular':
+        rec_df = rec_df.sort_values(by='no of enrollments', ascending=False)
+    elif sort_option == 'review_high_to_low':
+        rec_df = rec_df.sort_values(by='review', ascending=False)
+    elif sort_option == 'review_low_high':
+        rec_df = rec_df.sort_values(by='review', ascending=True)
+    elif sort_option == 'Basic_courses':
+        rec_df = rec_df[rec_df['level'] == 'Basic']
+    elif sort_option == 'Intermediate_courses':
+        rec_df = rec_df[rec_df['level'] == 'Intermediate']
+    elif sort_option == 'Alllevel_courses':
+        rec_df = rec_df[rec_df['level'] == 'All Level']
+    elif sort_option == 'Advanced_courses':
+        rec_df = rec_df[rec_df['level'] == 'Advanced']
+    elif sort_option == 'Shortest_to_longest':
+        rec_df = rec_df.sort_values(by='duration(hr)', ascending=True)
+    elif sort_option == 'Longest_to_short':
+        rec_df = rec_df.sort_values(by='duration(hr)', ascending=False)
+
+
     ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre = extract_features(rec_df)
     course_map = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
 
-    return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0,'q':q})
+    return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0,'q':q,'sort_option': sort_option})
 
 
 def signup(request):
@@ -349,64 +374,12 @@ def sc_delete(request):
         messages.error(request, "Invalid user")
     if request.method == 'POST':
         course.delete()
-        messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Sourses")
+        messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Courses")
         return redirect('/saved_courses')
     return render(request, 'saved.html', {'obj':course_name})
 
 
-# from django.contrib.auth.views import PasswordResetView
 
-# class CustomPasswordResetView(PasswordResetView):
-#     template_name = 'password_reset_form.html'
-#     html_email_template_name = 'password_reset_email.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # Add uidb64 and token to the context
-#         uidb64 = self.get_context_data().get('uidb64', '')
-#         token = self.get_context_data().get('token', '')
-#         success_url = self.success_url + f'?uidb64={uidb64}&token={token}'
-
-#         return HttpResponseRedirect(success_url)
-
-# def coursedetails(request):
-#     with open('./savedmodels/df.pkl', 'rb') as g:
-#         df = pickle.load(g)
-#     ID = request.GET.get('ID')
-    
-#     course_title = df.loc[df['ID'] == int(ID), 'course name'].values[0]
-#     source = df.loc[df['ID'] == int(ID), 'source'].values[0]
-#     Url = df.loc[df['ID'] == int(ID), 'Url'].values[0]
-#     is_paid = df.loc[df['ID'] == int(ID), 'is-paid'].values[0]
-#     Instructor = df.loc[df['ID'] == int(ID), 'Instructor'].values[0]
-#     level = df.loc[df['ID'] == int(ID), 'level'].values[0]
-#     no_of_enrollment = df.loc[df['ID'] == int(ID), 'no of enrollments'].values[0]
-#     duration = df.loc[df['ID'] == int(ID), 'duration(hr)'].values[0]
-#     rating = df.loc[df['ID'] == int(ID), 'rating'].values[0]
-#     review = df.loc[df['ID'] == int(ID), 'review'].values[0]
-#     published_year = df.loc[df['ID'] == int(ID), 'published year'].values[0]
-#     genre = df.loc[df['ID'] == int(ID), 'genre'].values[0]
-#     is_paid_str = str(is_paid)
-#     no_of_enrollment_int = int(no_of_enrollment)
-#     duration_int = int(duration)
-#     rating_int = int(rating)
-#     review_int = int(review)
-#     course_details = {
-#         'course_title': course_title,
-#         'source': source,
-#         'Url': Url,
-#         'is_paid': bool(is_paid),
-#         'Instructor': Instructor,
-#         'level': level,
-#         'no_of_enrollment': no_of_enrollment,
-#         'duration': duration,
-#         'rating': rating,
-#         'review': review,
-#         'published_year': published_year,
-#         'genre': genre,
-#     }
-
-#     return JsonResponse(course_details)
     
 
 def coursedetails(request):
