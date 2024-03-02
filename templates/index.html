@@ -110,6 +110,12 @@
                                 </form>
                             </div>
                             <div class="drop">Save</div>
+                            
+                            
+                            {% comment %} <button class='text' onclick="showCourseDetails()">View Details</button> {% endcomment %}
+                            {% comment %} <a href="#" onclick="showCourseDetails('{{ course_data.0 }}')">
+                                <button class="text">View Details</button>
+                            </a> {% endcomment %}
                             <button class="text" onclick="showCourseDetails('{{ course_data.0 }}')">View Details</button>
                             <a href="{{ course_data.3 }}" target="_blank">
                                 <button class='text'>Open Course</button>

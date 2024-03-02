@@ -926,7 +926,6 @@ main .searchbox .icon {
     position: absolute;
     top: 8px;
     right: 14px;
-    /* transform: translateY(-50%); */
 }
 .loginmain .loginwrapper a{
     color: black;
@@ -937,7 +936,6 @@ main .searchbox .icon {
 }
 .loginmain .loginwrapper .forgotpw{
     display: flex;
-    /* justify-content: space-around; */
     justify-content: right;
     font-size: 18px;
     margin: 20px 0px;
@@ -1011,13 +1009,18 @@ main .searchbox .icon {
 .loginmain .loginwrapper .info4{
     margin: 80px 0px;
     font-size: 25px;
+    text-align: center;
+}
+.loginmain .loginwrapper .userpass i.shifted{
+    position: absolute;
+    top: 38px;
 }
 
 /* signup page  */
 .loginmain .signupwrapper{
     position: absolute;
     top: 90px;
-    right: 38vw;
+    right: 36vw;
     height: 520px;
     width: 23vw;
     background-color: rgb(0, 180, 180);

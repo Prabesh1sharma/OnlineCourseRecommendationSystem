@@ -37,9 +37,8 @@ function showCourseDetails(courseId) {
             console.error('Error fetching course details:', error);
         });
 }
-function showCourseDetails(){
-    document.querySelector(".layout .viewcoursedetails").style.display = "flex";
-}
+
+
 function hideCourseDetails(){
     document.querySelector(".layout .viewcoursedetails").style.display = "none";
 }
@@ -51,7 +50,7 @@ function showhideUserProfile(){
 }
 function showhideNavContents(){
     document.querySelector("nav .navcontents").classList.toggle("showblock");
-}
+} 
 function showRating(){
     document.querySelector(".layout .sortlist li.rating").classList.toggle("show");
     document.querySelector(".layout .sortlist li.rating2").classList.toggle("show");
@@ -66,4 +65,3 @@ function showDuration(){
     document.querySelector(".layout .sortlist li.duration").classList.toggle("show");
     document.querySelector(".layout .sortlist li.duration2").classList.toggle("show");
 }
-
