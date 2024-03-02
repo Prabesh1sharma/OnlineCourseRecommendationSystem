@@ -1,5 +1,4 @@
 console.log("js connected")
-
 function showCourseDetails(){
     document.querySelector(".layout .viewcoursedetails").style.display = "flex";
 }
@@ -11,6 +10,9 @@ function showhideSortList(){
 }
 function showhideUserProfile(){
     document.querySelector("#dropdown").classList.toggle("show");
+}
+function showhideNavContents(){
+    document.querySelector("nav .navcontents").classList.toggle("showblock");
 }
 function showRating(){
     document.querySelector(".layout .sortlist li.rating").classList.toggle("show");
@@ -25,22 +27,3 @@ function showDuration(){
     document.querySelector(".layout .sortlist li.duration2").classList.toggle("show");
 }
 
-// document.onclick = function(obj){
-//     if (!document.querySelector(".layout .sortlist").contains.obj.target){
-//         document.querySelector(".layout .sortlist").classList.toggle("show");
-//     }
-// }
-// document.addEventListener("click", function(event) {
-//     if (event.target !== sortlist && !sortlist.contains(targetElement)) {
-//         document.querySelector(".layout .sortlist").style.display = "none";
-//     }
-// });
-
-// document.addEventListener("click", function(event) {
-//     var sortlist = document.getElementById("sortlist");
-//     var targetElement = event.target; 
-
-//     if (targetElement.id !== "sorticon" && !sortlist.contains(targetElement)) {
-//         sortlist.style.display = "none";
-//     }
-// });
