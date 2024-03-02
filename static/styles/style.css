@@ -492,7 +492,6 @@ main .searchbox .icon {
 .layout .viewcoursedetails{
     position: fixed;
     top: 180px;
-    left: 435px;
     left: 28vw;
     background-color: rgb(55, 55, 55);
     border: 4px solid black;
@@ -571,7 +570,7 @@ main .searchbox .icon {
     text-align: right;
     padding-right: 5px;
 }
-.layout .viewcoursedetails button.open{
+.layout .viewcoursedetails a.open{
     position: absolute;
     bottom: 10px;
     right: 16vw;
@@ -581,12 +580,13 @@ main .searchbox .icon {
     border-radius: 20px;
     background-color: rgb(95, 95, 95);
     padding: 3px 8px;
+    text-decoration: none;
+    color: black;
 }
-.layout .viewcoursedetails button.open:hover{
+.layout .viewcoursedetails a.open:hover{
     background-color: black;
     color: rgb(95, 95, 95);
 }
-
 
 /* categories page*/
 .layout .categories{
@@ -677,6 +677,12 @@ main .searchbox .icon {
     display: none;
 }
 .layout .sortlist li.level2{
+    display: none;
+}
+.layout .sortlist li.level3{
+    display: none;
+}
+.layout .sortlist li.level4{
     display: none;
 }
 .layout .sortlist li.duration2{
@@ -961,6 +967,12 @@ main .searchbox .icon {
     text-align: center;
     margin: 0px;
 }
+.loginmain .loginwrapper .userpass i.shifted{
+    position: absolute;
+    top: 8px;
+    right: 14px;
+    transform: translateY(-50%);
+}
 .loginmain .loginwrapper h3{
     text-align: center;
 }
@@ -987,14 +999,20 @@ main .searchbox .icon {
 }
 .loginmain .loginwrapper .info2{
     margin: 10px 0px;
-    font-size: 20px;
+    font-size: 17px;
     text-align: justify;
+}
+.loginmain .loginwrapper .info3{
+    margin: 0px;
+    font-size: 17px;
+    font-weight: bold;
+    text-align: center;
 }
 .loginmain .loginwrapper .info4{
     margin: 80px 0px;
     font-size: 25px;
-    text-align: center;
 }
+
 /* signup page  */
 .loginmain .signupwrapper{
     position: absolute;

@@ -32,9 +32,7 @@
               });
         </script>
         {% endfor %}
-
             <main>
-                
                 <div class="layout">
                     <div class="viewcoursedetails">
                         <div class="freeimgcontainer">
@@ -63,9 +61,7 @@
                                 No of Reviews : fill <br>   
                             </span>
                         </div>
-                        <a href="#">
-                            <button class="open">Open Course</button>
-                        </a> 
+                        <a href="#" target="_blank" class="open">Open Course</a>
                     </div> 
                         {% if  course|length < 1 %}
          <h3 style = "text-align: center; padding-top: 5%;">You have no course on Saved Courses</h3>
@@ -107,9 +103,7 @@
                                 </form>
                                 </div>
                                 <div id="unsavedrop">Unsave</div>
-                                <a href="#">
-                                    <button class="text"  onclick="showCourseDetails()">View Details</button>
-                                </a>
+                                <button class="text" onclick="showCourseDetails('{{ ID }}')">View Details</button>
                                 <a a href="{{ Url }}" target="_blank">
                                     <button class="text">Open Course</button>
                                 </a>

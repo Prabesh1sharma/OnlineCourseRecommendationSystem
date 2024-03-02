@@ -13,6 +13,9 @@ from django.utils.datastructures import MultiValueDictKeyError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
+import json
+from django.http import JsonResponse, HttpResponseBadRequest
+
 
 # Create your views here.
 def top50(request):
@@ -209,10 +212,35 @@ def categoriesCourseName(request):
 
     q = request.GET.get('genre', '')
     rec_df = df[df['genre'].str.contains(q, case=False)]
+    sort_option = request.GET.get('sort', 'default')
+    if sort_option == 'recently_uploaded':
+        rec_df = rec_df.sort_values(by='published year', ascending=False)
+    elif sort_option == 'free_courses':
+        rec_df = rec_df[rec_df['is-paid'] == False]
+    elif sort_option == 'most_popular':
+        rec_df = rec_df.sort_values(by='no of enrollments', ascending=False)
+    elif sort_option == 'review_high_to_low':
+        rec_df = rec_df.sort_values(by='review', ascending=False)
+    elif sort_option == 'review_low_high':
+        rec_df = rec_df.sort_values(by='review', ascending=True)
+    elif sort_option == 'Basic_courses':
+        rec_df = rec_df[rec_df['level'] == 'Basic']
+    elif sort_option == 'Intermediate_courses':
+        rec_df = rec_df[rec_df['level'] == 'Intermediate']
+    elif sort_option == 'Alllevel_courses':
+        rec_df = rec_df[rec_df['level'] == 'All Level']
+    elif sort_option == 'Advanced_courses':
+        rec_df = rec_df[rec_df['level'] == 'Advanced']
+    elif sort_option == 'Shortest_to_longest':
+        rec_df = rec_df.sort_values(by='duration(hr)', ascending=True)
+    elif sort_option == 'Longest_to_short':
+        rec_df = rec_df.sort_values(by='duration(hr)', ascending=False)
+
+
     ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre = extract_features(rec_df)
     course_map = zip(ID, course_title, source, Url, is_paid, Instructor, level, no_of_enrollment, duration, rating, review, published_year, genre)
 
-    return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0,'q':q})
+    return render(request,'insidecategory.html',{'course_map': course_map, 'showerror': len(rec_df) == 0,'q':q,'sort_option': sort_option})
 
 
 def signup(request):
@@ -346,23 +374,29 @@ def sc_delete(request):
         messages.error(request, "Invalid user")
     if request.method == 'POST':
         course.delete()
-        messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Sourses")
+        messages.success(request, f"'{course_name}' is unsaved Successfully from Saved Courses")
         return redirect('/saved_courses')
     return render(request, 'saved.html', {'obj':course_name})
 
 
-# from django.contrib.auth.views import PasswordResetView
 
-# class CustomPasswordResetView(PasswordResetView):
-#     template_name = 'password_reset_form.html'
-#     html_email_template_name = 'password_reset_email.html'
+    
 
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         # Add uidb64 and token to the context
-#         uidb64 = self.get_context_data().get('uidb64', '')
-#         token = self.get_context_data().get('token', '')
-#         success_url = self.success_url + f'?uidb64={uidb64}&token={token}'
+def coursedetails(request):
+    if request.method == 'GET':
+        # Get the course ID from the query parameters
+        ID = request.GET.get('ID')
 
-#         return HttpResponseRedirect(success_url)
+        # Assuming you have a DataFrame named 'df'
+        with open('./savedmodels/df.pkl', 'rb') as g:
+            df = pickle.load(g)
 
+        # Retrieve course details based on the ID
+        course_details = df[df['ID'] == int(ID)].to_dict(orient='records')[0]
+
+        # Return course details as JSON response
+        return JsonResponse(course_details)
+    else:
+        # Handle other HTTP methods if needed
+        return HttpResponseBadRequest("Invalid HTTP method")
+    

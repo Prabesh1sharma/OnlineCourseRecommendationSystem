@@ -32,8 +32,8 @@
                 </h1>
                 <div class="popularsort">
                     <!-- Prabesh!! sun na ..yeta jun button click gareko cha tesailai active banaune ani arko lai inactive-->
-                    <button {% if request.path == '/top50/reviews/' %}class="active"{% endif %} {% if request.path == '/' %}class="active"{% endif %} onclick="window.location.href='{% url 'top50_reviews' %}'">On The Basis Of Reviews</button>
-                    <button {% if request.path == '/top50/enrollment/' %}class="active" {% endif %} onclick="window.location.href='{% url 'top50_enrollment' %}'">On The Basis Of Enrollment</button>
+                    <button {% if request.path == '/top50/reviews/' %}class="active"{% endif %} {% if request.path == '/' %}class="active"{% endif %} {% if request.path != '/top50/reviews/' %}class="inactive"{% endif %} {% if request.path != '/' %}class="inactive"{% endif %} onclick="window.location.href='{% url 'top50_reviews' %}'">On The Basis Of Reviews</button>
+                    <button {% if request.path == '/top50/enrollment/' %}class="active" {% endif %} {% if request.path != '/top50/enrollment/' %}class="inactive" {% endif %} onclick="window.location.href='{% url 'top50_enrollment' %}'">On The Basis Of Enrollment</button>
                     {% comment %} <button class="active" onclick="window.location.href='{% url 'top50_reviews' %}'">On The Basis Of Reviews</button> {% endcomment %}
 
                     <br>
@@ -47,7 +47,7 @@
                         <i class="fa fa-times"></i>
                     </button>
                     <div class="headingcontainer">
-                        <h2>Course Name Fill  </h2> 
+                        <h2>{{ course_data.1 }}  </h2> 
                     </div>
                     <br><br><br>
                     <div class="details">
@@ -65,13 +65,16 @@
                             No of Reviews : fill <br>   
                         </span>
                     </div>
-                    <a href="#">
+                    {% comment %} <a href="#" target="_blank">
                         <button class="open">Open Course</button>
-                    </a> 
+                    </a>  {% endcomment %}
+                    <a href="#" target="_blank" class="open">Open Course</a>
                 </div> 
                 <div class="courses">
                     {% for course_data in courses_data %}
                     <span class="container">
+                        
+                        
                         <div class="headingcontainer">
                             <h2>{{ course_data.1 }}</h2>
                         </div>
@@ -107,11 +110,12 @@
                                 </form>
                             </div>
                             <div class="drop">Save</div>
-                            <button class='text view-details' onclick="showCourseDetails()">View Details</button>
+                            <button class="text" onclick="showCourseDetails('{{ course_data.0 }}')">View Details</button>
                             <a href="{{ course_data.3 }}" target="_blank">
                                 <button class='text'>Open Course</button>
                             </a>
                         </div>
+                        
                     </span>
                 {% endfor %}
                 </div>

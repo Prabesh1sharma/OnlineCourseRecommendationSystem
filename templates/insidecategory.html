@@ -34,34 +34,44 @@
                 <div class="sortlist" id="sortlist">
                     <ul>
                         <li class="visible">
+                            <a href="?genre={{ q }}&sort=recently_uploaded">
                             <button>
                                 Recently Published/Uploaded
                             </button>
+                        </a>
                         </li>
                         <li class="visible">
+                            <a href="?genre={{ q }}&sort=free_courses">
                             <button>
                                 Free Courses Only
                             </button>
+                        </a>
                         </li>
                         <li class="visible">
+                            <a href="?genre={{ q }}&sort=most_popular">
                             <button>
                                 Most Popular
                             </button>
+                        </a>
                         </li>
                         <li class="visible">
                             <button onclick="showRating()">
-                                Rating <span>▼</span>
+                                No. of Reviews <span>▼</span>
                             </button>
                         </li>
                         <li class="rating">
-                            <button>
-                                <span>►</span> Highest To Lowest
-                            </button>
+                            <a href="?genre={{ q }}&sort=review_high_to_low">
+                                <button>
+                                    <span>►</span> Highest To Lowest
+                                </button>
+                            </a>
                         </li>
                         <li class="rating2">
-                            <button>
-                                <span>►</span> Lowest To Highest
-                            </button>
+                            <a href="?genre={{ q }}&sort=review_low_high">
+                                <button>
+                                    <span>►</span> Lowest To Highest
+                                </button>
+                            </a>
                         </li>
                         <li class="visible">
                             <button onclick="showLevel()">
@@ -69,14 +79,32 @@
                             </button>
                         </li>
                         <li class="level">
-                            <button>
-                                <span>►</span> Beginner To Advanced
-                            </button>
+                            <a href="?genre={{ q }}&sort=Basic_courses">
+                                <button>
+                                    <span>►</span> Basic
+                                </button>
+                            </a>
                         </li>
                         <li class="level2">
-                            <button>
-                                <span>►</span> Advanced To Beginner
-                            </button>
+                            <a href="?genre={{ q }}&sort=Intermediate_courses">
+                                <button>
+                                    <span>►</span> Intermediate
+                                </button>
+                            </a>
+                        </li>
+                        <li class="level3">
+                            <a href="?genre={{ q }}&sort=Alllevel_courses">
+                                <button>
+                                    <span>►</span> All Level
+                                </button>
+                            </a>
+                        </li>
+                        <li class="level4">
+                            <a href="?genre={{ q }}&sort=Advanced_courses">
+                                <button>
+                                    <span>►</span> Advanced
+                                </button>
+                            </a>
                         </li>
                         <li class="visible">
                             <button onclick="showDuration()">
@@ -84,14 +112,18 @@
                             </button>
                         </li>
                         <li class="duration">
-                            <button>
-                                <span>►</span> Shortest To Longest
-                            </button>
+                            <a href="?genre={{ q }}&sort=Shortest_to_longest">
+                                <button>
+                                    <span>►</span> Shortest To Longest
+                                </button>
+                            </a>
                         </li>
                         <li class="duration2">
-                            <button>
-                                <span>►</span> Longest To Shortest
-                            </button>
+                            <a href="?genre={{ q }}&sort=Longest_to_short">
+                                <button>
+                                    <span>►</span> Longest To Shortest
+                                </button>
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -104,12 +136,12 @@
                         <i class="fa fa-times"></i>
                     </button>
                     <div class="headingcontainer">
-                        <h2>Course Name Fill </h2>
+                        <h2>{{ course_title }} </h2>
                     </div>
                     <br><br><br>
                     <div class="details">
                         <span class="column1">
-                            Genre : fill <br>
+                            Genre : {{ genre }} <br>
                             Source : fill <br>
                             Level: fill <br>
                             Published Year : fill <br>
@@ -122,9 +154,7 @@
                             No of Reviews : fill <br>
                         </span>
                     </div>
-                    <a href="#">
-                        <button class="open">Open Course</button>
-                    </a>
+                    <a href="#" target="_blank" class="open">Open Course</a>
                 </div> 
 
                 <div class="courses">
@@ -163,9 +193,10 @@
                             </form>
                             </div>
                             <div class="drop">Save</div>
-                            <a href="#">
-                                <button class="text" onclick="showCourseDetails()">View Details</button>
-                            </a>
+                            {% comment %} <form action="/coursedetails" method="POST">{% csrf_token %}
+                                <input type="hidden" name="ID" value="{{ ID }}"> {% endcomment %}
+                                <button class="text" onclick="showCourseDetails('{{ ID }}')">View Details</button>
+                            {% comment %} </form> {% endcomment %}
                             <a href="{{ Url }}" target="_blank">
                                 <button class="text">Open Course</button>
                             </a>
