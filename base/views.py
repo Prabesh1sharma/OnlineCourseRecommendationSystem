@@ -168,7 +168,7 @@ def SearchRecommendAfterSearch(request):
             my_dict = request.POST
             title_name = my_dict['course'].strip()
             if not title_name:
-                error_message = "Please enter something before searching."
+                error_message = "Please Enter a Course Before Searching!"
                 return render(request, 'aftersearch.html', {'error_message': error_message})
             
 
